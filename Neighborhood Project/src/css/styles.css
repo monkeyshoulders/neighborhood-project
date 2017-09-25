@@ -7,26 +7,12 @@ html, body {
 
 }
 
-/*
-font-family: 'Pompiere', cursive;
-font-family: 'Lekton', sans-serif;
-font-family: 'Amatica SC', cursive;
-*/
-
 #map {
     width: 80%;
     height: 90%;
     position: absolute;
     right: 0;
     bottom: 0;
-
-}
-
-.title {
-  font-family: 'Special Elite', cursive;
-  font-size: 40px;
-  margin-left: 26%;
-  margin-top: 20px;
 
 }
 
@@ -40,11 +26,6 @@ font-family: 'Amatica SC', cursive;
 
 }
 
-.content {
-
-  margin-top: 30px;
-}
-
 .sidebar {
     width: 20%;
     height: 100%;
@@ -54,12 +35,27 @@ font-family: 'Amatica SC', cursive;
 
 }
 
+/*Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {
+
+  .title {
+    font-family: 'Special Elite', cursive;
+    font-size: 40px;
+    margin-left: 26%;
+    margin-top: 20px;
+
+  }
+
+.content {
+
+  margin-top: 30px;
+}
+
 .search {
   font-size: 30px;
   margin-left: 20px;
   margin-bottom: 10px;
   font-family: 'Amatica SC', bold, cursive;
-
 
 }
 
@@ -89,7 +85,6 @@ input {
 ul {
   list-style: none;
   padding-left: 2px;
-
 
 }
 
@@ -121,15 +116,170 @@ li {
 
 }
 
+}  /* end of @media width desktop */
 
 /*Small devices (landscape phones, 576px and up)*/
-@media (min-width: 576px) { ... }
+@media (min-width: 576px) {
+
+  .title {
+    font-family: 'Special Elite', cursive;
+    font-size: 40px;
+    margin-left: 26%;
+    margin-top: 20px;
+
+  }
+
+.content {
+
+  margin-top: 30px;
+}
+
+.search {
+  font-size: 30px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-family: 'Amatica SC', bold, cursive;
+
+}
+
+input {
+  margin-left: 20px;
+  width: 190px;
+  height: 25px;
+  font-size: 17px;
+
+}
+
+.container {
+  margin-top: 10px;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+
+.locations {
+
+  position: relative;
+  overflow: auto;
+  height: 570px;
+
+}
+
+ul {
+  list-style: none;
+  padding-left: 2px;
+
+}
+
+li {
+  font-size: 16px;
+  color: rgb(242, 242, 242);
+  padding: 8px 0px;
+  font-family: 'Amatica SC', cursive;
+  border-top: 1px solid black;
+}
+
+.brew-name {
+  font-size: 22px;
+}
+
+.brew-hood {
+  font-size: 17px;
+}
+
+.icon {
+  float: left;
+  padding: 0;
+}
+
+.icon img {
+  height: 60px;
+  width: 60px;
+  padding-right: 5px;
+
+}
+
+}
 
 /*Medium devices (tablets, 768px and up)*/
-@media (min-width: 768px) { ... }
+@media (min-width: 768px) {
 
-/*Large devices (desktops, 992px and up)*/
-@media (min-width: 992px) { ... }
+  .title {
+    font-family: 'Special Elite', cursive;
+    font-size: 40px;
+    margin-left: 26%;
+    margin-top: 20px;
 
-/*Extra large devices (large desktops, 1200px and up)*/
-@media (min-width: 1200px) { ... }
+  }
+
+.content {
+
+  margin-top: 30px;
+}
+
+.search {
+  font-size: 30px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  font-family: 'Amatica SC', bold, cursive;
+
+}
+
+input {
+  margin-left: 20px;
+  width: 190px;
+  height: 25px;
+  font-size: 17px;
+
+}
+
+.container {
+  margin-top: 10px;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+
+.locations {
+
+  position: relative;
+  overflow: auto;
+  height: 570px;
+
+}
+
+ul {
+  list-style: none;
+  padding-left: 2px;
+
+}
+
+li {
+  font-size: 16px;
+  color: rgb(242, 242, 242);
+  padding: 8px 0px;
+  font-family: 'Amatica SC', cursive;
+  border-top: 1px solid black;
+}
+
+.brew-name {
+  font-size: 22px;
+}
+
+.brew-hood {
+  font-size: 17px;
+}
+
+.icon {
+  float: left;
+  padding: 0;
+}
+
+.icon img {
+  height: 60px;
+  width: 60px;
+  padding-right: 5px;
+
+}
+
+}

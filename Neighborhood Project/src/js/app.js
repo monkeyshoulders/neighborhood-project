@@ -34,6 +34,7 @@ ko.applyBindings(new ViewModel());
 
 
 var map;
+var markers = [];
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -55,20 +56,20 @@ function initMap() {
          });
          markers.push(marker);
 
-         markers.addListener('click', function() {
+         marker.addListener('click', function() {
             infoWindow.open(map, marker);
           });
 
         }
 
-    var window = function(){
-      for (var i = 0; i < brewers.length; i++) {
-        var info = '<h3>brewers[i].name</h3>';
-      }
-    };
-
-    var infoWindow = new google.maps.InfoWindow({
-      content: window
-    });
+    // var window = function(){
+    //   for (var i = 0; i < brewers.length; i++) {
+    //     var info = '<h3>brewers[i].name</h3>';
+    //   }
+    // };
+    //
+    // var infoWindow = new google.maps.InfoWindow({
+    //   content: window
+    // });
 
 }
