@@ -43,7 +43,12 @@ function initMap() {
       lng: -80.825901
     },
     zoom: 13,
-    mapTypeControl: false
+    mapTypeControl: false,
+    styles: [{
+    stylers: [{
+      saturation: -100
+    }]
+  }]
   });
   // markers
   for (var i = 0; i < brewers.length; i++) {
@@ -53,6 +58,7 @@ function initMap() {
            map: map,
            icon: brewers[i].mapicon,
            animation: google.maps.Animation.DROP,
+          
          });
          markers.push(marker);
 
