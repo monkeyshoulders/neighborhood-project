@@ -143,7 +143,7 @@ var brewers = [{
     website: 'http://legionbrewing.com/',
     style: 'American',
     icon: 'img/legion.jpg',
-    mapicon: 'img/legionmap copy.png'
+    mapicon: 'img/legionmap.png'
   },
   {
     name: 'Resident Culture',
