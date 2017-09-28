@@ -24,7 +24,7 @@ var ViewModel = function() {
   var self = this;
 
  this.breweries = ko.observableArray();
-  this.filterInput = ko.observable('');
+ this.filterInput = ko.observable('');
   for (var i = 0; i < brewers.length; i++) {
     this.breweries.push(new Brewery(brewers[i]));
   }
