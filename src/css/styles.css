@@ -9,79 +9,90 @@ html, body {
 
 
 /*Large devices (desktops, 992px and up)*/
-@media (min-width: 992px) {
+/*@media (min-width: 992px) {*/
 
 
   #map {
       width: 80%;
       height: 90%;
       position: absolute;
-      right: 0;
       bottom: 0;
+      right: 0;
 
   }
-   /*test*/
+
+  #infoWindow {
+    color: black;
+  }
+
 
   .navbar {
-    width: 80%;
+    width: 100%;
     height: 10%;
     top: 0;
-    right: 0;
     position: absolute;
     background-color: rgba(51, 51, 51, 1);
 
   }
 
-  .sidebar {
-      width: 20%;
-      height: 100%;
-      position: fixed;
-  		background-color: rgb(68, 68, 68);
-  		color: rgb(213, 213, 213);
-
-  }
-
-  .title {
+  h2 {
     font-family: 'Special Elite', cursive;
-    font-size: 40px;
-    margin-left: 26%;
-    margin-top: 20px;
+    font-size: 2.5rem;
+    width: 90%;
+    right: 0;
+    margin-left: 33%;
+    margin-top: 1rem;
 
   }
 
-.content {
+  i {
+    left: 0;
+    width: 10%;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    cursor: pointer;
 
-  margin-top: 30px;
-}
+    /*transform: translateZ(1);*/
+
+  }
+
+  .sidebar {
+      bottom: 0;
+      left: 0;
+      width: 20%;
+      height: 90%;
+      position: fixed;
+  		color: rgb(213, 213, 213);
+      /*transform: translateX(-100%);
+      transition: transform 0.5s ease;*/
+      background-color: rgb(68, 68, 68);
+
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
 
 .search {
   font-size: 30px;
-  margin-left: 20px;
+  margin-left: 15px;
+  margin-top: 10px;
   margin-bottom: 10px;
   font-family: 'Amatica SC', bold, cursive;
 
 }
 
 input {
-  margin-left: 20px;
-  width: 190px;
+  width: 13rem;
   height: 25px;
   font-size: 17px;
 
 }
 
-.container {
-  margin-top: 10px;
-  position: absolute;
-  overflow: hidden;
-  width: 100%;
-}
-
 .locations {
-
   position: relative;
   overflow: auto;
-  height: 570px;
+  height: 81%;
 
 }
 
@@ -96,7 +107,7 @@ li {
   color: rgb(242, 242, 242);
   padding: 8px 0px;
   font-family: 'Amatica SC', cursive;
-  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .brew-name {
@@ -119,10 +130,10 @@ li {
 
 }
 
-}  /* end of @media width desktop */
+/*}  /* end of @media width desktop */*/
 
 /*Small devices (landscape phones, 576px and up)*/
-@media (min-width: 576px) {
+/*@media (min-width: 576px) {
 
 
   #map {
@@ -133,7 +144,7 @@ li {
       bottom: 0;
 
   }
-   /*test*/
+
 
   .navbar {
     width: 80%;
@@ -232,10 +243,10 @@ li {
 
 }
 
-}
+}*/
 
 /*Medium devices (tablets, 768px and up)*/
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
 
 
   #map {
@@ -246,7 +257,7 @@ li {
       bottom: 0;
 
   }
-   /*test*/
+
 
   .navbar {
     width: 80%;
@@ -346,4 +357,4 @@ li {
 
 }
 
-}
+}*/

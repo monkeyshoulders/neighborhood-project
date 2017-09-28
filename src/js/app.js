@@ -4,7 +4,6 @@ var Brewery = function(data) {
   this.hood = data.hood + "  | ";
   this.style = 'Style: ' + data.style;
   this.website = data.website;
-  // this.ll = data.ll;
   this.icon = data.icon;
 };
 
@@ -39,8 +38,8 @@ var markers = [];
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
-      lat: 35.211505,
-      lng: -80.825901
+      lat: 35.218939,
+      lng: -80.842209
     },
     zoom: 13,
     mapTypeControl: false,
@@ -50,6 +49,19 @@ function initMap() {
     }]
   }]
   });
+
+  // InfoWindow
+      var info = function(){
+        for (var i = 0; i < brewers.length; i++) {
+          var info = '<p style="color:black">blah</p>';
+          // '<div id="infoWindow">' + '<h2>brewers[i].name</h2>' + '<p>brewers[i].address<br>brewers[i].hood<br>brewers[i].website</p>' + '</div>'
+        }
+      };
+
+      var infoWindow = new google.maps.InfoWindow({
+        content: info
+      });
+
   // markers
   for (var i = 0; i < brewers.length; i++) {
          var position = brewers[i].ll;
@@ -58,7 +70,7 @@ function initMap() {
            map: map,
            icon: brewers[i].mapicon,
            animation: google.maps.Animation.DROP,
-          
+
          });
          markers.push(marker);
 
@@ -68,14 +80,5 @@ function initMap() {
 
         }
 
-    // var window = function(){
-    //   for (var i = 0; i < brewers.length; i++) {
-    //     var info = '<h3>brewers[i].name</h3>';
-    //   }
-    // };
-    //
-    // var infoWindow = new google.maps.InfoWindow({
-    //   content: window
-    // });
 
 }
