@@ -7,6 +7,13 @@ var Brewery = function(data) {
   this.icon = data.icon;
 };
 
+var filterBrew = function(){
+    if (this.breweries) {
+      //search is empty display all
+    } else {
+      //filter by entry after every keystroke
+    }
+};
 
 
 var ViewModel = function() {
@@ -17,8 +24,6 @@ var ViewModel = function() {
   for (var i = 0; i < brewers.length; i++) {
     this.breweries.push(new Brewery(brewers[i]));
   }
-
-
 
 
   // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
