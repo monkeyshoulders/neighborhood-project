@@ -6,7 +6,7 @@ var Brewery = function(data) {
   this.website = data.website;
   this.icon = data.icon;
 };
-
+// maybe .filter() ?
 var filterBrew = function(){
     if (this.breweries) {
       //search is empty display all
@@ -58,7 +58,7 @@ function initMap() {
   // InfoWindow
       var info = function(){
         for (var i = 0; i < brewers.length; i++) {
-          var info = '<p style="color:black">blah</p>';
+          var info = '<p style="color:black">xxxxx</p>';
           // '<div id="infoWindow">' + '<h2>brewers[i].name</h2>' + '<p>brewers[i].address<br>brewers[i].hood<br>brewers[i].website</p>' + '</div>'
         }
       };
