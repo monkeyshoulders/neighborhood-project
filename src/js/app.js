@@ -5,43 +5,53 @@ var Brewery = function(data) {
   this.style = 'Style: ' + data.style;
   this.website = data.website;
   this.icon = data.icon;
+  this.marker = new google.maps.Marker({
+           position: data.ll,
+           map: map,
+           icon: data.mapicon,
+           animation: google.maps.Animation.DROP,
+
+        });
+;
+
+ this.marker.addListener('click', function() {
+            infoWindow.open(map, this);
+          });
+
 };
-// maybe .filter() ?
-
-var displayBrew = breweries.filter(filterBrew);
-
-var filterBrew = function(){
-    if (x) {
-      x = this.breweries
-      
-      //search is empty display all
-
-    } else {
-      //filter by entry after every keystroke
-    }
-};
-
 
 var ViewModel = function() {
   var self = this;
 
-  this.breweries = ko.observableArray();
-
+ this.breweries = ko.observableArray();
+  this.filterInput = ko.observable('');
   for (var i = 0; i < brewers.length; i++) {
     this.breweries.push(new Brewery(brewers[i]));
   }
 
+  self.filterBrew = ko.computed(function(){
+      var filter = self.filterInput().toLowerCase();
+      console.log(self.breweries())
+      return ko.utils.arrayFilter(self.breweries(), function(brewery) {
+        var match = brewery.name.toLowerCase().indexOf(filter) !== -1;    // store the match state
+        brewery.marker.setVisible(match);
+        console.log(brewery, match)
+        return match;
+      })
+  });
 
-  // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
 
-  // Filtering an array: http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
+ self.showWindow = function(location) {
+    google.maps.event.trigger(location.marker,'click');
+  }
+
+ // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
+
+ // Filtering an array: http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
   // http://knockoutjs.com/documentation/computedObservables.html
   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
 
 };
-
-ko.applyBindings(new ViewModel());
-
 
 var map;
 var markers = [];
@@ -61,35 +71,5 @@ function initMap() {
   }]
   });
 
-  // InfoWindow
-      var info = function(){
-        for (var i = 0; i < brewers.length; i++) {
-          var info = '<p style="color:black">xxxxx</p>';
-          // '<div id="infoWindow">' + '<h2>brewers[i].name</h2>' + '<p>brewers[i].address<br>brewers[i].hood<br>brewers[i].website</p>' + '</div>'
-        }
-      };
-
-      var infoWindow = new google.maps.InfoWindow({
-        content: info
-      });
-
-  // markers
-  for (var i = 0; i < brewers.length; i++) {
-         var position = brewers[i].ll;
-         var marker = new google.maps.Marker({
-           position: position,
-           map: map,
-           icon: brewers[i].mapicon,
-           animation: google.maps.Animation.DROP,
-
-         });
-         markers.push(marker);
-
-         marker.addListener('click', function() {
-            infoWindow.open(map, marker);
-          });
-
-        }
-
-
+  ko.applyBindings(new ViewModel());
 }

@@ -18,9 +18,7 @@
         <input type="text" placeholder="name or neighborhood" data-bind="textInput: filterBrew, valueUpdate: 'afterkeydown'">
     </div>
     <div class="locations">
-      <ul data-bind= "foreach: breweries">
-        <!-- http://knockoutjs.com/documentation/click-binding.html -->
-        <!-- http://knockoutjs.com/documentation/binding-context.html -->
+      <ul data-bind= "foreach: filterBrew"> <!-- http://knockoutjs.com/documentation/click-binding.html -->
         <li>
           <span class="icon"><img data-bind="attr:{src: icon}"></span>
           <span class="brew-name" data-bind="text: name"></span> <br>
