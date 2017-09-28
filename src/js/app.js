@@ -7,9 +7,15 @@ var Brewery = function(data) {
   this.icon = data.icon;
 };
 // maybe .filter() ?
+
+var displayBrew = breweries.filter(filterBrew);
+
 var filterBrew = function(){
-    if (this.breweries) {
+    if (x) {
+      x = this.breweries
+      
       //search is empty display all
+
     } else {
       //filter by entry after every keystroke
     }
