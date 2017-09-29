@@ -31,11 +31,9 @@ var ViewModel = function() {
 
   self.filterBrew = ko.computed(function(){
       var filter = self.filterInput().toLowerCase();
-      console.log(self.breweries())
       return ko.utils.arrayFilter(self.breweries(), function(brewery) {
-        var match = brewery.name.toLowerCase().indexOf(filter) !== -1;    // store the match state
+        var match = brewery.name.toLowerCase().indexOf(filter) !== -1 ||  brewery.hood.toLowerCase().indexOf(filter) !== -1 || brewery.style.toLowerCase().indexOf(filter) !== -1;  // store the match state *help from Susan in 1:1
         brewery.marker.setVisible(match);
-        console.log(brewery, match)
         return match;
       })
   });
