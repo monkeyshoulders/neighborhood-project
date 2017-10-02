@@ -130,6 +130,11 @@ li {
 
 }
 
+.icon img:hover {
+  height: 62px;
+  width: 62px;
+}
+
 /*}  /* end of @media width desktop */*/
 
 /*Small devices (landscape phones, 576px and up)*/

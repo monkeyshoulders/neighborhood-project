@@ -12,13 +12,25 @@ var Brewery = function(data) {
            animation: google.maps.Animation.DROP,
 
         });
-;
 
- this.marker.addListener('click', function() {
-            infoWindow.open(map, this);
-          });
+  this.marker.addListener('click', toggleBounce);
+  this.marker.addListener('click', function() {
+      infoWindow.open(map, this);
+    });
 
 };
+
+function toggleBounce() {
+        if (this.marker.getAnimation() !== null) {
+          this.marker.setAnimation(null);
+        } else {
+          this.marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+      }
+
+function brewInfoWindow() {
+
+}
 
 var ViewModel = function() {
   var self = this;
@@ -38,16 +50,9 @@ var ViewModel = function() {
       })
   });
 
-
  self.showWindow = function(location) {
     google.maps.event.trigger(location.marker,'click');
   }
-
- // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
-
- // Filtering an array: http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
-  // http://knockoutjs.com/documentation/computedObservables.html
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
 
 };
 
@@ -71,3 +76,9 @@ function initMap() {
 
   ko.applyBindings(new ViewModel());
 }
+
+// http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
+
+// Filtering an array: http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
+ // http://knockoutjs.com/documentation/computedObservables.html
+ // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
