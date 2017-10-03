@@ -7,18 +7,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="css/styles.css" type="text/css">
-<link href="https://fonts.googleapis.com/css?family=Amatica+SC|Special+Elite" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amatica+SC|Special+Elite" rel="stylesheet">
 </head>
 
 <body>
   <!-- http://knockoutjs.com/documentation/textinput-binding.html -->
-  <div class="sidebar">
+  <div id="sidebar">
     <div class="search">
-        <span>Search: </span>
-        <input type="text" placeholder="name or neighborhood" data-bind="textInput: filterInput">
+      <span>Search: </span>
+      <input type="text" placeholder="name or neighborhood" data-bind="textInput: filterInput">
     </div>
     <div class="locations">
-      <ul data-bind= "foreach: filterBrew"> <!-- http://knockoutjs.com/documentation/click-binding.html -->
+      <ul data-bind="foreach: filterBrew">
+        <!-- http://knockoutjs.com/documentation/click-binding.html -->
         <li>
           <span class="icon"><img data-bind="attr:{src: icon}"></span>
           <span class="brew-name" data-bind="text: name"></span> <br>
@@ -30,18 +31,19 @@
   </div>
 
   <div class="navbar">
-    <div class="icon">
-      <i id="icon" class="fa fa-bars fa-2x nav-toggle" aria-hidden="true"></i>
-    </div>
-    <div class="title">
-      <h2>Charlotte Craft Brewers</h2>
-    </div>
-
+    <!-- <i id="button" class="fa fa-bars fa-2x" aria-hidden="true"></i> -->
+    <input type="checkbox" id="show-toggle" />
+    <button for="show-toggle" id="show-btn">Toggle Search</button>
+    <!-- <select name="my-select" id="show-search">
+        <option value="opt1">Show Search</option>
+        <option value="opt2">Hide Serch</option>
+    </select> -->
+    <h2 class="title">Charlotte Craft Brewers</h2>
   </div>
 
   <div id="map"></div>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="js/knockout.js"></script>
   <script src="js/model.js"></script>
   <script src="js/app.js"></script>

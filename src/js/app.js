@@ -6,53 +6,60 @@ var Brewery = function(data) {
   this.website = data.website;
   this.icon = data.icon;
   this.marker = new google.maps.Marker({
-           position: data.ll,
-           map: map,
-           icon: data.mapicon,
-           animation: google.maps.Animation.DROP,
+    position: data.ll,
+    map: map,
+    icon: data.mapicon,
+    animation: google.maps.Animation.DROP,
 
-        });
+  });
 
-  this.marker.addListener('click', toggleBounce);
   this.marker.addListener('click', function() {
-      infoWindow.open(map, this);
-    });
+   infowindow.open(map, marker);
+ });
+
+ this.infoWindow = new google.maps.InfoWindow({
+   content: "brewInfoString",
+
+ });
+
+	this.brewInfoString = '<div id="brewInfoWindow"><div id="brew-name"><em>' + self.name + "</em></div>" + '<div>' + self.address + "</div>" + '<div>' + self.hood + "</div>" + '<div>' + self.website + "</div></div>";
+
 
 };
 
-function toggleBounce() {
-        if (this.marker.getAnimation() !== null) {
-          this.marker.setAnimation(null);
-        } else {
-          this.marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
-      }
+$('#icon').toggle(
+function() {
+    $('#map').css('left', '0')
+}, function() {
+    $('#map').css('left', '80')
+})
 
-function brewInfoWindow() {
-
-}
 
 var ViewModel = function() {
   var self = this;
 
- this.breweries = ko.observableArray();
- this.filterInput = ko.observable('');
+  this.breweries = ko.observableArray();
+  this.filterInput = ko.observable('');
   for (var i = 0; i < brewers.length; i++) {
     this.breweries.push(new Brewery(brewers[i]));
   }
 
-  self.filterBrew = ko.computed(function(){
-      var filter = self.filterInput().toLowerCase();
-      return ko.utils.arrayFilter(self.breweries(), function(brewery) {
-        var match = brewery.name.toLowerCase().indexOf(filter) !== -1 ||  brewery.hood.toLowerCase().indexOf(filter) !== -1 || brewery.style.toLowerCase().indexOf(filter) !== -1;  // store the match state *help from Susan in 1:1
-        brewery.marker.setVisible(match);
-        return match;
-      })
+  self.filterBrew = ko.computed(function() {
+    var filter = self.filterInput().toLowerCase();
+    return ko.utils.arrayFilter(self.breweries(), function(brewery) {
+      var match = brewery.name.toLowerCase().indexOf(filter) !== -1 || brewery.hood.toLowerCase().indexOf(filter) !== -1 || brewery.style.toLowerCase().indexOf(filter) !== -1; // store the match state *help from Susan in 1:1
+      brewery.marker.setVisible(match);
+      return match;
+    });
   });
 
- self.showWindow = function(location) {
-    google.maps.event.trigger(location.marker,'click');
-  }
+  // self.showWindow = function(location) {
+  //   google.maps.event.addListener(marker, 'click', function() {
+  //     brewInfoWindow.open(map, marker);
+  //   });
+  // };
+
+
 
 };
 
@@ -68,10 +75,10 @@ function initMap() {
     zoom: 13,
     mapTypeControl: false,
     styles: [{
-    stylers: [{
-      saturation: -100
+      stylers: [{
+        saturation: -100
+      }]
     }]
-  }]
   });
 
   ko.applyBindings(new ViewModel());
@@ -80,5 +87,5 @@ function initMap() {
 // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
 
 // Filtering an array: http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
- // http://knockoutjs.com/documentation/computedObservables.html
- // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
+// http://knockoutjs.com/documentation/computedObservables.html
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
