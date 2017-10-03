@@ -1,3 +1,13 @@
+
+//    TODO:  1. InfoWindow
+//           2. Clicking list view displays infoWindow on marker
+//           3. Markers Bounce when Clicked
+//           4. Use Instagram API
+//           5. Error handling message
+//           6. README
+//           7. Mobile and Tablet Version
+
+
 var Brewery = function(data) {
   var self = this;
   this.name = data.name;
