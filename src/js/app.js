@@ -13,17 +13,16 @@ var Brewery = function(data) {
 
   });
 
-  this.marker.addListener('click', function() {
-   infowindow.open(map, marker);
- });
+  this.marker.addListener('click', function() {        ///////////This doesn't work
+    infowindow.open(map, marker);
+  });
 
- this.infoWindow = new google.maps.InfoWindow({
-   content: "brewInfoString",
+  this.infoWindow = new google.maps.InfoWindow({     ///////// nor does this
+    content: "brewInfoString",
+  });
 
- });
-
-	this.brewInfoString = '<div id="brewInfoWindow"><div id="brew-name"><em>' + self.name + "</em></div>" + '<div>' + self.address + "</div>" + '<div>' + self.hood + "</div>" + '<div>' + self.website + "</div></div>";
-
+  this.brewInfoString = '<div id="brewInfoWindow"><div id="brew-name"><em>' + self.name + "</em></div>" + '<div>' + self.address + "</div>" + '<div>' + self.hood + "</div>" + '<div>' + self.website + "</div></div>";
+                                                      ///////////  this either
 
 };
 
@@ -46,11 +45,11 @@ var ViewModel = function() {
     });
   });
 
-  // self.showWindow = function(location) {
-  //   google.maps.event.addListener(marker, 'click', function() {
-  //     brewInfoWindow.open(map, marker);
-  //   });
-  // };
+  self.showWindow = function(location) {  //???????????? do i need this here
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(map, marker);
+    });
+  };
 
 
 
