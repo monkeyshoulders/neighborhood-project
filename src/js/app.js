@@ -27,13 +27,6 @@ var Brewery = function(data) {
 
 };
 
-$('#icon').toggle(
-function() {
-    $('#map').css('left', '0')
-}, function() {
-    $('#map').css('left', '80')
-})
-
 
 var ViewModel = function() {
   var self = this;
