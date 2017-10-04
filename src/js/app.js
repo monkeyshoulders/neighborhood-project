@@ -87,7 +87,6 @@ function initMap() {
 }
 
 // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
-
 // Filtering an array: http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
 // http://knockoutjs.com/documentation/computedObservables.html
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
