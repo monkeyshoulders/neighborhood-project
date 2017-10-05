@@ -21,12 +21,17 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
 
   });
 
-
   this.marker.addListener('click', function() { //opens infoWindow
-    infowindow.setContent(this.brewInfoString)
+    infowindow.setContent(self.brewInfoString);  // <--- CHANGE *********
     infowindow.open(map, this);
 
   });
+
+  // this.marker.addListener('click', function() { //opens infoWindow
+  //   infowindow.setContent(self.brewInfoString)
+  //   infowindow.open(map, this);
+  //
+  // });
 
   this.brewInfoString = makeInfoString(self); //access the string constructor
 
@@ -60,7 +65,7 @@ var ViewModel = function() {
     });
   });
 
-  self.showWindow = function(brewery) {  //displays infoWindow when list item is Clicked
+  self.showWindow = function() {  //displays infoWindow when list item is Clicked
 
     infowindow.open(map, this.marker);
 
