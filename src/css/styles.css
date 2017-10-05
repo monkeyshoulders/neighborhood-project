@@ -113,6 +113,7 @@ li {
   padding: 8px 0px;
   font-family: 'Amatica SC', cursive;
   border-bottom: 1px solid black;
+  cursor: pointer;
 }
 
 .brew-name {
