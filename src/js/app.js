@@ -23,14 +23,12 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
 
 
   this.marker.addListener('click', function() { //opens infoWindow
-    self.infoWindow.open(map, this);
+    infowindow.setContent(this.brewInfoString)
+    infowindow.open(map, this);
+
   });
 
   this.brewInfoString = makeInfoString(self); //access the string constructor
-
-  this.infoWindow = new google.maps.InfoWindow({  //create new infoWindow and populate with content
-    content: self.brewInfoString
-  });
 
 };
 
@@ -64,7 +62,7 @@ var ViewModel = function() {
 
   self.showWindow = function(brewery) {  //displays infoWindow when list item is Clicked
 
-    brewery.infoWindow.open(map, this.marker);
+    infowindow.open(map, this.marker);
 
   };
 
@@ -74,9 +72,10 @@ var ViewModel = function() {
 
 var map;
 var markers = [];  // stores markers
-var infoWindows = [];
+var infowindow;
 
 function initMap() {  // initializes map
+  infowindow = new google.maps.InfoWindow();
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 35.218939,
