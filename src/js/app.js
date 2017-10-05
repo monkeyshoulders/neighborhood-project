@@ -1,19 +1,8 @@
-//    TODO:
-//           2. Clicking list view displays infoWindow on marker
-//           3. Markers Bounce when Clicked
+//    TODO:  3. Markers Bounce when Clicked
 //           4. Use Instagram API
 //           5. Error handling message
 //           6. README
 //           7. Mobile and Tablet Version
-
-function makeInfoString(data) {  //creates infoWindow content
-  var content = '<div id="brewInfoWindow"><div id="brew-name"><em>' + data.name +
-    '</em></div>' + '<div>' + data.address +
-    '</div>' + '<div>' + data.hood +
-    '</div>' + '<div>' + data.website +
-    '</div></div>';
-  return content;
-}
 
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
@@ -32,17 +21,27 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
 
   });
 
-  this.marker.addListener('click', function openWindow() { //opens infoWindow
+
+  this.marker.addListener('click', function() { //opens infoWindow
     self.infoWindow.open(map, this);
   });
 
-  this.brewInfoString = makeInfoString(self); //access the string contructor
+  this.brewInfoString = makeInfoString(self); //access the string constructor
 
   this.infoWindow = new google.maps.InfoWindow({  //create new infoWindow and populate with content
     content: self.brewInfoString
   });
 
 };
+
+  function makeInfoString(data) {  //creates infoWindow content
+    var content = '<div id="brewInfoWindow"><div id="brew-name"><em>' + data.name +
+      '</em></div>' + '<div>' + data.address +
+      '</div>' + '<div>' + data.hood +
+      '</div>' + '<div>' + data.website +
+      '</div></div>';
+    return content;
+  }
 
 
 var ViewModel = function() {
@@ -63,8 +62,8 @@ var ViewModel = function() {
     });
   });
 
-  // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
   self.showWindow = function(brewery) {  //displays infoWindow when list item is Clicked
+
     brewery.infoWindow.open(map, this.marker);
 
   };
@@ -75,6 +74,7 @@ var ViewModel = function() {
 
 var map;
 var markers = [];  // stores markers
+var infoWindows = [];
 
 function initMap() {  // initializes map
   map = new google.maps.Map(document.getElementById('map'), {
