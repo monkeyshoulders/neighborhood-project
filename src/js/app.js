@@ -22,7 +22,7 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   });
 
   this.marker.addListener('click', function() { //opens infoWindow
-    infowindow.setContent(self.brewInfoString);  // <--- CHANGE *********
+    infowindow.setContent(self.brewInfoString)  // <--- CHANGE *********
     infowindow.open(map, this);
 
   });
