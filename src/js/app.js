@@ -1,4 +1,3 @@
-
 //    TODO:  1. InfoWindow
 //           2. Clicking list view displays infoWindow on marker
 //           3. Markers Bounce when Clicked
@@ -7,10 +6,20 @@
 //           6. README
 //           7. Mobile and Tablet Version
 
+function makeInfoString(data) {
+  var content = '<div id="brewInfoWindow"><div id="brew-name"><em>' + data.name +
+    '</em></div>' + '<div>' + data.address +
+    '</div>' + '<div>' + data.hood +
+    '</div>' + '<div>' + data.website +
+    '</div></div>';
+  return content;
+}
+
 
 var Brewery = function(data) {
   var self = this;
   this.name = data.name;
+  this.address = data.address;
   this.hood = data.hood + "  | ";
   this.style = 'Style: ' + data.style;
   this.website = data.website;
@@ -23,16 +32,18 @@ var Brewery = function(data) {
 
   });
 
-  this.marker.addListener('click', function() {        ///////////This doesn't work
-    infowindow.open(map, marker);
+  this.marker.addListener('click', function() {
+    ///////////This doesn't work
+    // self.infoWindow.setContent(self.somethingNew);
+    self.infoWindow.open(map, this);
   });
 
-  this.infoWindow = new google.maps.InfoWindow({     ///////// nor does this
-    content: "brewInfoString",
-  });
+  this.brewInfoString = makeInfoString(self);
 
-  this.brewInfoString = '<div id="brewInfoWindow"><div id="brew-name"><em>' + self.name + "</em></div>" + '<div>' + self.address + "</div>" + '<div>' + self.hood + "</div>" + '<div>' + self.website + "</div></div>";
-                                                      ///////////  this either
+  this.infoWindow = new google.maps.InfoWindow({ ///////// nor does this
+    //content: "brewInfoString",
+    content: self.brewInfoString
+  }); ///////////  this either
 
 };
 
@@ -55,10 +66,13 @@ var ViewModel = function() {
     });
   });
 
-  self.showWindow = function(location) {  //???????????? do i need this here
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map, marker);
-    });
+  // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
+  self.showWindow = function(brewery) { //???????????? do i need this here
+    //console.log('click');
+    console.log(brewery) // do something with brewery. marker
+    // google.maps.event.addListener(marker, 'click', function() {
+    //   infowindow.open(map, marker);
+    // });
   };
 
 
