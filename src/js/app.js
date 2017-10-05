@@ -1,4 +1,4 @@
-//    TODO:  1. InfoWindow
+//    TODO:
 //           2. Clicking list view displays infoWindow on marker
 //           3. Markers Bounce when Clicked
 //           4. Use Instagram API
@@ -6,7 +6,7 @@
 //           6. README
 //           7. Mobile and Tablet Version
 
-function makeInfoString(data) {
+function makeInfoString(data) {  //creates infoWindow content
   var content = '<div id="brewInfoWindow"><div id="brew-name"><em>' + data.name +
     '</em></div>' + '<div>' + data.address +
     '</div>' + '<div>' + data.hood +
@@ -16,7 +16,7 @@ function makeInfoString(data) {
 }
 
 
-var Brewery = function(data) {
+var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
   var self = this;
   this.name = data.name;
   this.address = data.address;
@@ -32,18 +32,15 @@ var Brewery = function(data) {
 
   });
 
-  this.marker.addListener('click', function() {
-    ///////////This doesn't work
-    // self.infoWindow.setContent(self.somethingNew);
+  this.marker.addListener('click', function() { //opens infoWindow
     self.infoWindow.open(map, this);
   });
 
-  this.brewInfoString = makeInfoString(self);
+  this.brewInfoString = makeInfoString(self); //access the string contructor
 
-  this.infoWindow = new google.maps.InfoWindow({ ///////// nor does this
-    //content: "brewInfoString",
+  this.infoWindow = new google.maps.InfoWindow({  //create new infoWindow and populate with content
     content: self.brewInfoString
-  }); ///////////  this either
+  });
 
 };
 
@@ -51,23 +48,23 @@ var Brewery = function(data) {
 var ViewModel = function() {
   var self = this;
 
-  this.breweries = ko.observableArray();
-  this.filterInput = ko.observable('');
+  this.breweries = ko.observableArray();  // watches breweries array
+  this.filterInput = ko.observable('');  // watches search bar for Filtering
   for (var i = 0; i < brewers.length; i++) {
     this.breweries.push(new Brewery(brewers[i]));
   }
 
-  self.filterBrew = ko.computed(function() {
+  self.filterBrew = ko.computed(function() { // filters list view of breweries
     var filter = self.filterInput().toLowerCase();
     return ko.utils.arrayFilter(self.breweries(), function(brewery) {
-      var match = brewery.name.toLowerCase().indexOf(filter) !== -1 || brewery.hood.toLowerCase().indexOf(filter) !== -1 || brewery.style.toLowerCase().indexOf(filter) !== -1; // store the match state *help from Susan in 1:1
+      var match = brewery.name.toLowerCase().indexOf(filter) !== -1 || brewery.hood.toLowerCase().indexOf(filter) !== -1 || brewery.style.toLowerCase().indexOf(filter) !== -1; // store the match state *help from Sarah in 1:1
       brewery.marker.setVisible(match);
       return match;
     });
   });
 
   // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
-  self.showWindow = function(brewery) { //???????????? do i need this here
+  self.showWindow = function(brewery) {
     //console.log('click');
     console.log(brewery) // do something with brewery. marker
     // google.maps.event.addListener(marker, 'click', function() {
@@ -79,10 +76,10 @@ var ViewModel = function() {
 
 };
 
-var map;
-var markers = [];
+var map;  
+var markers = [];  // stores markers
 
-function initMap() {
+function initMap() {  // initializes map
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
       lat: 35.218939,
