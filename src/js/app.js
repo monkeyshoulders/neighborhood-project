@@ -32,7 +32,7 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
 
   });
 
-  this.marker.addListener('click', function() { //opens infoWindow
+  this.marker.addListener('click', function openWindow() { //opens infoWindow
     self.infoWindow.open(map, this);
   });
 
@@ -64,19 +64,16 @@ var ViewModel = function() {
   });
 
   // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
-  self.showWindow = function(brewery) {
-    //console.log('click');
-    console.log(brewery) // do something with brewery. marker
-    // google.maps.event.addListener(marker, 'click', function() {
-    //   infowindow.open(map, marker);
-    // });
+  self.showWindow = function(brewery) {  //displays infoWindow when list item is Clicked
+    brewery.infoWindow.open(map, this.marker);
+
   };
 
 
 
 };
 
-var map;  
+var map;
 var markers = [];  // stores markers
 
 function initMap() {  // initializes map
