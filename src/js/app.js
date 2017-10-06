@@ -1,4 +1,4 @@
-//    TODO:  3. Markers Bounce when Clicked
+//    TODO:
 //           4. Use Instagram API
 //           5. Error handling message
 //           6. README
@@ -23,30 +23,20 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
 
   this.marker.addListener('click', function() {
     var marker = this;
-    infowindow.setContent(self.brewInfoString);
+    infowindow.setContent(self.brewInfoString); // sets content of infowindow
     infowindow.open(map, this);
 
-
-    marker.setAnimation(google.maps.Animation.BOUNCE);
+    marker.setAnimation(google.maps.Animation.BOUNCE); // animation of marker on click
     setTimeout(function() {
-        marker.setAnimation(null);
-    }, 750);
-
-});
-
-  // this.marker.addListener('click', function() {
-  //   infowindow.setContent(self.brewInfoString);
-  //   infowindow.open(map, this);
-  //   var marker = this;
-  //     marker.setAnimation(google.maps.Animation.BOUNCE);
-  //     setTimeout(function() {
-  //       marker.setAnimation(null);
-  //     },750);
-  //
-  // });
-
+      marker.setAnimation(null);
+    }, 806);
+  });
 
   this.brewInfoString = makeInfoString(self); //accesses the string content function
+
+};
+
+
 
 function makeInfoString(data) { //creates infoWindow content
   var content = '<div id="brewInfoWindow"><div id="brew-name"><em>' + data.name +
@@ -104,5 +94,10 @@ function initMap() { // initializes map
     }]
   });
 
-  ko.applyBindings(new ViewModel());
-};
+  // if (/*map*/ !== 'undefined') {  // Error handling for map not loading
+  //   ko.applyBindings(new ViewModel());
+  // } else {
+  //     alert('Error loading Google Maps. Check internet connection. Please try again later');
+  // }
+ko.applyBindings(new ViewModel());
+}
