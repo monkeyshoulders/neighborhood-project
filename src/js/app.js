@@ -9,11 +9,11 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   var self = this;
   this.name = data.name;
   this.address = data.address;
-  this.hood = data.hood + "  | ";
+  this.hood = data.hood + " " + " ";
   this.style = 'Style: ' + data.style;
-  this.website = data.website;
+  this.website = '<a href="' + data.website + '" target="blank">Go to Website</a>';
   this.icon = data.icon;
-  this.marker = new google.maps.Marker({
+  this.marker = new google.maps.Marker({ // creates a new marker
     position: data.ll,
     map: map,
     icon: data.mapicon,
@@ -22,30 +22,39 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   });
 
   this.marker.addListener('click', function() { //opens infoWindow
-    infowindow.setContent(self.brewInfoString);  
+    infowindow.setContent(self.brewInfoString);
     infowindow.open(map, this);
+ });
 
-  });
+  this.brewInfoString = makeInfoString(self); //accesses the string content function
 
-  this.brewInfoString = makeInfoString(self); //access the string constructor
 
 };
 
-  function makeInfoString(data) {  //creates infoWindow content
-    var content = '<div id="brewInfoWindow"><div id="brew-name"><em>' + data.name +
-      '</em></div>' + '<div>' + data.address +
-      '</div>' + '<div>' + data.hood +
-      '</div>' + '<div>' + data.website +
-      '</div></div>';
-    return content;
+function toggleBounce() {
+
+  if (marker.getAnimation() != null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
   }
+};
+
+function makeInfoString(data) { //creates infoWindow content
+  var content = '<div id="brewInfoWindow"><div id="brew-name"><em>' + data.name +
+    '</em></div>' + '<div>' + data.address +
+    '</div>' + '<div>' + data.hood +
+    '</div>' + '<div>' + data.website +
+    '</div></div>';
+  return content;
+};
 
 
 var ViewModel = function() {
   var self = this;
 
-  this.breweries = ko.observableArray();  // watches breweries array
-  this.filterInput = ko.observable('');  // watches search bar for Filtering
+  this.breweries = ko.observableArray(); // watches breweries array
+  this.filterInput = ko.observable(''); // watches search bar for Filtering
   for (var i = 0; i < brewers.length; i++) {
     this.breweries.push(new Brewery(brewers[i]));
   }
@@ -59,19 +68,19 @@ var ViewModel = function() {
     });
   });
 
-  self.showWindow = function() {  //displays infoWindow when list item is Clicked
+  self.showWindow = function() { //displays infoWindow when list item is Clicked
 
-    infowindow.open(map, this.marker);
     infowindow.setContent(this.brewInfoString);
+    infowindow.open(map, this.marker);
 
   };
 };
 
-var map;
-var markers = [];  // stores markers
-var infowindow;
+var map; // delclares global map var
+var infowindow; //declares global infowindow var
+var markers = []; // stores markers
 
-function initMap() {  // initializes map
+function initMap() { // initializes map
   infowindow = new google.maps.InfoWindow();
   map = new google.maps.Map(document.getElementById('map'), {
     center: {
@@ -79,18 +88,13 @@ function initMap() {  // initializes map
       lng: -80.842209
     },
     zoom: 13,
-    mapTypeControl: false,
+    mapTypeControl: false, // excludes option to switch map types
     styles: [{
       stylers: [{
-        saturation: -100
+        saturation: -100 // makes map grey
       }]
     }]
   });
 
   ko.applyBindings(new ViewModel());
 }
-
-// http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
-// Filtering an array: http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
-// http://knockoutjs.com/documentation/computedObservables.html
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
