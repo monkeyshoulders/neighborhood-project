@@ -28,6 +28,7 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
  });
 
  // this.marker.addListener('mouseover', function(){
+ //   this.marker.mouseover = true;
  //   this.marker.setAnimation(google.maps.Animation.BOUNCE)
  //  console.log('mouseover');
  // });
@@ -37,13 +38,14 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
 
 };
 
-  function toggleBounce() {
-    if (this.marker.getAnimation() != null) {
-      this.marker.setAnimation(null);
-    } else {
-      this.marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-  };
+  function toggleBounce(marker) {
+    var marker = this;
+      this.setAnimation(google.maps.Animation.BOUNCE);
+      this.setTimeout(function() {
+        this.setAnimation(null);
+      })(500);
+    };
+
 
 function makeInfoString(data) { //creates infoWindow content
   var content = '<div id="brewInfoWindow"><div id="brew-name"><em>' + data.name +
