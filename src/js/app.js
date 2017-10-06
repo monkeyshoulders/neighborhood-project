@@ -21,30 +21,28 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
 
   });
 
-  this.marker.addListener('click', toggleBounce, function() { //opens infoWindow
-    infowindow.setContent(self.brewInfoString);
-    infowindow.open(map, this);
-    console.log('click');
- });
+  this.marker.addListener('click', toggleBounce);
 
- // this.marker.addListener('mouseover', function(){
- //   this.marker.mouseover = true;
- //   this.marker.setAnimation(google.maps.Animation.BOUNCE)
- //  console.log('mouseover');
- // });
+  // this.marker.addListener('mouseover', function(){
+  //   this.marker.mouseover = true;
+  //   this.marker.setAnimation(google.maps.Animation.BOUNCE)
+  //  console.log('mouseover');
+  // });
 
   this.brewInfoString = makeInfoString(self); //accesses the string content function
 
 
 };
 
-  function toggleBounce(marker) {
+function toggleBounce(marker) {
     var marker = this;
-      this.setAnimation(google.maps.Animation.BOUNCE);
-      this.setTimeout(function() {
-        this.setAnimation(null);
-      })(500);
-    };
+    infowindow.setContent(self.brewInfoString);
+    infowindow.open(map, this);
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+    setTimeout(function() {
+      marker.setAnimation(null);
+    },750);
+};
 
 
 function makeInfoString(data) { //creates infoWindow content
