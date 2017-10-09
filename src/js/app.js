@@ -1,5 +1,5 @@
 //    TODO:
-//           4. Use Instagram API
+//           4. Use FourSquare API
 //           5. Error handling message
 //           6. README
 //           7. Mobile and Tablet Version
