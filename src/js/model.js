@@ -4,6 +4,8 @@ var brewers = [{
       lat: 35.185429,
       lng: -80.881015
     },
+    id = '',
+    infoImg = '',
     address: '215 Southside Dr',
     hood: 'Southend',
     website: 'https://sugarcreekbrewing.com/',
@@ -18,6 +20,8 @@ var brewers = [{
       lat: 35.187449,
       lng: -80.881815
     },
+    id = '',
+    infoImg = '',
     address: '4150 Yancey Rd',
     hood: 'Southend',
     website: 'http://www.oldemeckbrew.com/',
@@ -31,6 +35,8 @@ var brewers = [{
       lat: 35.240348,
       lng: -80.814849
     },
+    id = '',
+    infoImg = '',
     address: '2229 N. Davidson St',
     hood: 'Noda',
     website: 'http://nodabrewing.com/',
@@ -44,6 +50,8 @@ var brewers = [{
       lat: 35.247799,
       lng: -80.804048
     },
+    id = '',
+    infoImg = '',
     address: '3306-C N Davidson St',
     hood: 'Noda',
     website: 'https://saludcerveceria.com/',
@@ -57,6 +65,8 @@ var brewers = [{
       lat: 35.230656,
       lng: -80.826525
     },
+    id = '',
+    infoImg = '',
     address: '1016 N. Davidson St',
     hood: 'Noda',
     website: 'https://birdsongbrewing.com/',
@@ -70,6 +80,8 @@ var brewers = [{
       lat: 35.201444,
       lng: -80.873595
     },
+    id = '',
+    infoImg = '',
     address: '3000 S. Tryon St',
     hood: 'Southend',
     website: 'http://www.discoverlennyboy.com/',
@@ -83,6 +95,8 @@ var brewers = [{
       lat: 35.208722,
       lng: -80.862762
     },
+    id = '',
+    infoImg = '',
     address: '2161 Hawkins Street',
     hood: 'Southend',
     website: 'https://www.sycamorebrew.com/',
@@ -97,6 +111,8 @@ var brewers = [{
       lat: 35.220506,
       lng: -80.857539
     },
+    id = '',
+    infoImg = '',
     address: '1327 S. Mint St',
     hood: 'Uptown',
     website: 'http://www.unknownbrewing.com/',
@@ -111,6 +127,8 @@ var brewers = [{
       lat: 35.201092,
       lng: -80.869570
     },
+    id = '',
+    infoImg = '',
     address: '2900 Griffith St',
     hood: 'Southend',
     website: 'http://www.triplecbrewing.com/',
@@ -124,6 +142,8 @@ var brewers = [{
       lat: 35.216677,
       lng: -80.856644
     },
+    id = '',
+    infoImg = '',
     address: '1440 S Tryon St #110',
     hood: 'Southend',
     website: 'https://woodenrobotbrewery.com/',
@@ -138,6 +158,8 @@ var brewers = [{
       lat: 35.218387,
       lng: -80.812963
     },
+    id = '',
+    infoImg = '',
     address: '1906 Commonwealth Ave',
     hood: 'Plaza Midwood',
     website: 'http://legionbrewing.com/',
@@ -151,6 +173,8 @@ var brewers = [{
       lat: 35.220203,
       lng: -80.805539
     },
+    id = '',
+    infoImg = '',
     address: '2101 Central Ave',
     hood: 'Plaza Midwood',
     website: 'https://www.residentculture.com/',
