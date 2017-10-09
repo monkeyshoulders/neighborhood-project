@@ -8,7 +8,7 @@ var request = new XMLHttpRequest();
 var fourSquarePic = [];
 var fourSquareQuery = function() {
   for (var i = 0; i < brewers.ll.length; i++) {
-    brewers[i] //contruct the request with the lat lng of every brewery and save the href of the first picture in an fourSquarePic array
+    brewers.ll.[i] //contruct the request with the lat lng of every brewery and save the href of the first picture in an fourSquarePic array
   }
 }
 request.open('GET', fourSquareQuery);
