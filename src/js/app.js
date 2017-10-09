@@ -56,9 +56,9 @@ function getData(city, query, data) {
           var venues = result.response.venues;
            console.log(venues);
 
-           venues.forEach(function(venue) {
-            data.push(new Brewery(venue))
-           })
+          //  venues.forEach(function(venue) {
+          //   data.push(new Brewery(venue))
+          //  })
 
 
          }).fail(function(error) {
@@ -115,11 +115,11 @@ var ViewModel = function() {
 
   this.breweries = ko.observableArray(); // watches breweries array
   this.filterInput = ko.observable(''); // watches search bar for Filtering
-  //for (var i = 0; i < brewers.length; i++) {
-  //  this.breweries.push(new Brewery(brewers[i]));
-  //}
+  for (var i = 0; i < brewers.length; i++) {
+   this.breweries.push(new Brewery(brewers[i]));
+  }
 
-  getData('Charlotte', 'brewery', this.breweries);
+  // getData('Charlotte', 'brewery', this.breweries);
 
 
   self.filterBrew = ko.computed(function() { // filters list view of breweries
