@@ -10,16 +10,16 @@ var request = new XMLHttpRequest();
 var fourSquarePic = [];
 var fourSquareQuery = function() {
   for (var i = 0; i < brewers.ll.length; i++) {
-    brewers.ll.[i] //contruct the request with the lat lng of every brewery and save the href of the first picture in an fourSquarePic array https://developer.foursquare.com/docs/api/venues/photos
+    // brewers.ll.[i] //contruct the request with the venue id of every brewery and save the href of the first picture in an fourSquarePic array https://developer.foursquare.com/docs/api/venues/photos
 
-    // curl -X GET -G \
-    //   'https://api.foursquare.com/v2/venues/explore' \
-    //     -d client_id="G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A" \
-    //     -d client_secret="AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V" \
-    //     -d v="20170801" \
-    //     -d ll="40.7243,-74.0018" \
-    //     -d query="coffee" \
-    //     -d limit=1
+    curl -X GET -G \
+      'https://api.foursquare.com/v2/venues/explore' \
+        -d client_id="G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A" \
+        -d client_secret="AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V" \
+        -d v="20170801" \
+        -d ll="40.7243,-74.001" \
+        -d query="coffee" \
+        -d limit=1
 
   }
 }
