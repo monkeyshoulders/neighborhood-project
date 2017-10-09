@@ -10,16 +10,16 @@ var request = new XMLHttpRequest();
 var fourSquarePic = [];
 var fourSquareQuery = function() {
   for (var i = 0; i < brewers.ll.length; i++) {
-    // brewers.ll.[i] //contruct the request with the venue id of every brewery and save the href of the first picture in an fourSquarePic array https://developer.foursquare.com/docs/api/venues/photos
+  //  brewers.ll.[i] //contruct the request with the lat lng of every brewery and save the href of the first picture in an fourSquarePic array https://developer.foursquare.com/docs/api/venues/photos
 
-    curl -X GET -G \
-      'https://api.foursquare.com/v2/venues/explore' \
-        -d client_id="G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A" \
-        -d client_secret="AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V" \
-        -d v="20170801" \
-        -d ll="40.7243,-74.001" \
-        -d query="coffee" \
-        -d limit=1
+    // curl -X GET -G \
+    //   'https://api.foursquare.com/v2/venues/explore' \
+    //     -d client_id="G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A" \
+    //     -d client_secret="AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V" \
+    //     -d v="20170801" \
+    //     -d ll="40.7243,-74.0018" \
+    //     -d query="coffee" \
+    //     -d limit=1
 
   }
 }
@@ -27,12 +27,50 @@ request.open('GET', fourSquareQuery);
 request.onload = function() {
   var fourSquareData = JSON.parse(request.responseText);
 };
-request.send();
+
+//request.send();
+
+
+
+function getData(city, query, data) {
+
+         var CLIENT_ID = 'G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A',
+           CLIENT_SECRET = 'AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V',
+           version = '20170801',
+           city = city,
+           query = query,
+           base_url = "https://api.foursquare.com/v2/venues";
+
+         $.ajax({
+           url: base_url + '/search',
+           dataType: 'json',
+           data: {
+             client_id: CLIENT_ID,
+             client_secret: CLIENT_SECRET,
+             near: city,
+             v: version,
+             query: query
+           }
+         }).done(function(result) {
+
+          var venues = result.response.venues;
+           console.log(venues);
+
+           venues.forEach(function(venue) {
+            data.push(new Brewery(venue))
+           })
+
+
+         }).fail(function(error) {
+            console.log(error);
+         });
+}
 
 // put the data collected from FourSquare into the infowindow as an image
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
   var self = this;
+  this.id = data.id;
   this.name = data.name;
   this.address = data.address;
   this.hood = data.hood + " " + " ";
@@ -77,9 +115,12 @@ var ViewModel = function() {
 
   this.breweries = ko.observableArray(); // watches breweries array
   this.filterInput = ko.observable(''); // watches search bar for Filtering
-  for (var i = 0; i < brewers.length; i++) {
-    this.breweries.push(new Brewery(brewers[i]));
-  }
+  //for (var i = 0; i < brewers.length; i++) {
+  //  this.breweries.push(new Brewery(brewers[i]));
+  //}
+
+  getData('Charlotte', 'brewery', this.breweries);
+
 
   self.filterBrew = ko.computed(function() { // filters list view of breweries
     var filter = self.filterInput().toLowerCase();
