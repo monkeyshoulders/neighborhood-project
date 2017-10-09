@@ -4,6 +4,20 @@
 //           6. README
 //           7. Mobile and Tablet Version
 
+var request = new XMLHttpRequest();
+var fourSquarePic = [];
+var fourSquareQuery = function() {
+  for (var i = 0; i < brewers.ll.length; i++) {
+    brewers[i] //contruct the request with the lat lng of every brewery and save the href of the first picture in an fourSquarePic array
+  }
+}
+request.open('GET', fourSquareQuery);
+request.onload = function() {
+  var fourSquareData = JSON.parse(request.responseText);
+};
+request.send();
+
+// put the data collected from FourSquare into the infowindow as an image
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
   var self = this;
@@ -35,8 +49,6 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   this.brewInfoString = makeInfoString(self); //accesses the string content function
 
 };
-
-
 
 function makeInfoString(data) { //creates infoWindow content
   var content = '<div id="brewInfoWindow"><div id="brew-name"><em>' + data.name +
