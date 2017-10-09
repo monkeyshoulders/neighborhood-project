@@ -31,6 +31,7 @@ request.onload = function() {
 //request.send();
 
 
+
 function getData(city, query, data) {
 
          var CLIENT_ID = 'G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A',
