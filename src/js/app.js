@@ -29,6 +29,7 @@
 // };
 //
 // //request.send();
+document.getElementById('show-btn').addEventListener('click', toggleSidebar);
 
 function toggleSidebar() {
   var x = document.getElementById("sidebar");
