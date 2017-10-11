@@ -29,6 +29,8 @@
 // };
 //
 // //request.send();
+
+// toggle the sidebar when button is clicked 
 document.getElementById('show-btn').addEventListener('click', toggleSidebar);
 function toggleSidebar() {
   var x = document.getElementById('sidebar');

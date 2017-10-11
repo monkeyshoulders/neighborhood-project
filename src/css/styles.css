@@ -59,8 +59,6 @@ html, body {
 }
 
   #sidebar {
-      /*transform: translateX(0);*/
-      visibility: visible;
       bottom: 0;
       left: 0;
       width: 20%;
@@ -71,10 +69,9 @@ html, body {
 
   }
 
-  /* Show hidden content when the checkbox is checked */
-  #show-toggle:checked  ~ * #sidebar {
-    /*transform: translateX(-250px);*/
-    visibility: collapse;
+  #sidebar:target {
+    transition-timing-function: ease;
+    
   }
 
 
