@@ -30,18 +30,17 @@
 //
 // //request.send();
 document.getElementById('show-btn').addEventListener('click', toggleSidebar);
-
 function toggleSidebar() {
-  var x = document.getElementById("sidebar");
+  var x = document.getElementById('sidebar');
+  var m = document.getElementById('map');
    if (x.style.display === "none") {
        x.style.display = "block";
+       m.style.width = "80%";
    } else {
        x.style.display = "none";
-       document.getElementById('map').style.width = "100%";
+       m.style.width = "100%";
    }
 }
-
-
 
 function getData(city, query, data) {
 
@@ -148,6 +147,19 @@ var ViewModel = function() {
     infowindow.open(map, this.marker);
 
   };
+
+  // function toggleSidebar() {
+  //   var x = document.getElementById('sidebar');
+  //   var m = document.getElementById('map');
+  //    if (x.style.display === "none") {
+  //        x.style.display = "block";
+  //        m.style.width = "80%";
+  //    } else {
+  //        x.style.display = "none";
+  //        m.style.width = "100%";
+  //    }
+  // }
+
 };
 
 var map; // delclares global map var
