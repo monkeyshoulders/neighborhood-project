@@ -4,82 +4,55 @@
 //           6. README
 //           7. Mobile and Tablet Version
 
-
-
-// var request = new XMLHttpRequest();
-// var fourSquarePic = [];
-// var fourSquareQuery = function() {
-//   for (var i = 0; i < brewers.ll.length; i++) {
-//   //  brewers.ll.[i] //contruct the request with the lat lng of every brewery and save the href of the first picture in an fourSquarePic array https://developer.foursquare.com/docs/api/venues/photos
-//
-//     // curl -X GET -G \
-//     //   'https://api.foursquare.com/v2/venues/explore' \
-//     //     -d client_id="G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A" \
-//     //     -d client_secret="AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V" \
-//     //     -d v="20170801" \
-//     //     -d ll="40.7243,-74.0018" \
-//     //     -d query="coffee" \
-//     //     -d limit=1
-//
-//   }
-// }
-// request.open('GET', fourSquareQuery);
-// request.onload = function() {
-//   var fourSquareData = JSON.parse(request.responseText);
-// };
-//
-// //request.send();
-
 // toggle the sidebar when button is clicked
 document.getElementById('show-btn').addEventListener('click', toggleSidebar);
+
 function toggleSidebar() {
   var x = document.getElementById('sidebar');
   var m = document.getElementById('map');
-   if (x.style.display === "none") {
-       x.style.display = "block";
-       m.style.width = "80%";
-   } else {
-       x.style.display = "none";
-       m.style.width = "100%";
-   }
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    m.style.width = "80%";
+  } else {
+    x.style.display = "none";
+    m.style.width = "100%";
+  }
 }
 
 function getData(city, query, data) {
 
-         var CLIENT_ID = 'G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A',
-           CLIENT_SECRET = 'AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V',
-           version = '20170801',
-           city = city,
-           query = query,
-           base_url = "https://api.foursquare.com/v2/venues";
+  var CLIENT_ID = 'G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A',
+    CLIENT_SECRET = 'AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V',
+    version = '20170801',
+    city = city,
+    query = query,
+    base_url = "https://api.foursquare.com/v2/venues";
 
-         $.ajax({
-           url: base_url + '/search',
-           dataType: 'json',
-           data: {
-             client_id: CLIENT_ID,
-             client_secret: CLIENT_SECRET,
-             near: city,
-             v: version,
-             query: query
-           }
-         }).done(function(result) {
+  $.ajax({
+    url: base_url + '/search',
+    dataType: 'json',
+    data: {
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      near: city,
+      v: version,
+      query: query
+    }
+  }).done(function(result) {
 
-          var venues = result.response.venues;
-           console.log(venues);
+    var venues = result.response.venues;
+    console.log(venues);
 
-           venues.forEach(function(venue) {
-            data.push(breweries.phone)
-           })
+    venues.forEach(function(venue) {
+      data.push(new Brewery(venue))
+    })
 
 
-         }).fail(function(error) {
-           alert('OOPS! FourSquare info failed to load, refresh browser or try again later.')
-            console.log(error);
-         });
+  }).fail(function(error) {
+    alert('OOPS! FourSquare info failed to load, refresh browser or try again later.')
+    console.log(error);
+  });
 }
-
-// put the data collected from FourSquare into the infowindow as an image
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
   var self = this;
@@ -119,7 +92,6 @@ function makeInfoString(data) { //creates infoWindow content
     '</em></div>' + '<div>' + data.address +
     '</div>' + '<div>' + data.hood +
     '</div>' + '<div>' + data.website +
-    '<div>' + data.phone +
     '</div></div>';
   return content;
 };
@@ -131,10 +103,10 @@ var ViewModel = function() {
   this.breweries = ko.observableArray(); // watches breweries array
   this.filterInput = ko.observable(''); // watches search bar for Filtering
   for (var i = 0; i < brewers.length; i++) {
-   this.breweries.push(new Brewery(brewers[i]));
+    this.breweries.push(new Brewery(brewers[i]));
   }
 
-  getData('Charlotte', 'brewery', this.breweries);
+  // getData('Charlotte', 'brewery', this.breweries);
 
 
   self.filterBrew = ko.computed(function() { // filters list view of breweries
@@ -150,21 +122,11 @@ var ViewModel = function() {
 
     infowindow.setContent(this.brewInfoString);
     infowindow.open(map, this.marker);
+    setTimeout(function() {
+      infowindow.close(map, this.marker);
+    }, 6000);
 
   };
-
-  // function toggleSidebar() {
-  //   var x = document.getElementById('sidebar');
-  //   var m = document.getElementById('map');
-  //    if (x.style.display === "none") {
-  //        x.style.display = "block";
-  //        m.style.width = "80%";
-  //    } else {
-  //        x.style.display = "none";
-  //        m.style.width = "100%";
-  //    }
-  // }
-
 };
 
 var map; // delclares global map var
@@ -192,5 +154,5 @@ function initMap() { // initializes map
   // } else {
   //     alert('Error loading Google Maps. Check internet connection. Please try again later');
   // }
-ko.applyBindings(new ViewModel());
+  ko.applyBindings(new ViewModel());
 }

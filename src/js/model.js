@@ -9,7 +9,7 @@ var brewers = [{
     website: 'https://sugarcreekbrewing.com/',
     style: 'Belgian',
     icon: 'img/sugarcreek.png',
-    mapicon: 'img/sugarcreekmap.png'
+    mapicon: 'img/sugarcreekmap.png',
   },
 
   {
