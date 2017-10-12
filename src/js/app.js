@@ -30,7 +30,7 @@
 //
 // //request.send();
 
-// toggle the sidebar when button is clicked 
+// toggle the sidebar when button is clicked
 document.getElementById('show-btn').addEventListener('click', toggleSidebar);
 function toggleSidebar() {
   var x = document.getElementById('sidebar');
@@ -68,9 +68,9 @@ function getData(city, query, data) {
           var venues = result.response.venues;
            console.log(venues);
 
-          //  venues.forEach(function(venue) {
-          //   data.push(new Brewery(venue))
-          //  })
+           venues.forEach(function(venue) {
+            data.push(breweries.venue.contact.phone)
+           })
 
 
          }).fail(function(error) {
@@ -82,9 +82,10 @@ function getData(city, query, data) {
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
   var self = this;
-  this.id = data.id;
+  // this.id = data.id;
   this.name = data.name;
   this.address = data.address;
+  this.phone = data.phone;
   this.hood = data.hood + " " + " ";
   this.style = 'Style: ' + data.style;
   this.website = '<a href="' + data.website + '" target="blank">Go to Website</a>';
@@ -117,6 +118,7 @@ function makeInfoString(data) { //creates infoWindow content
     '</em></div>' + '<div>' + data.address +
     '</div>' + '<div>' + data.hood +
     '</div>' + '<div>' + data.website +
+    '<div>' + data.phone +
     '</div></div>';
   return content;
 };
@@ -131,7 +133,7 @@ var ViewModel = function() {
    this.breweries.push(new Brewery(brewers[i]));
   }
 
-  // getData('Charlotte', 'brewery', this.breweries);
+  getData('Charlotte', 'brewery', this.breweries);
 
 
   self.filterBrew = ko.computed(function() { // filters list view of breweries
