@@ -69,11 +69,12 @@ function getData(city, query, data) {
            console.log(venues);
 
            venues.forEach(function(venue) {
-            data.push(breweries.venue.contact.phone)
+            data.push(breweries.phone)
            })
 
 
          }).fail(function(error) {
+           alert('OOPS! FourSquare info failed to load, refresh browser or try again later.')
             console.log(error);
          });
 }
