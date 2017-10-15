@@ -9,7 +9,7 @@ html, body {
 
 
 /*Large devices (desktops, 992px and up)*/
-/*@media (min-width: 992px) {*/
+@media (max-width: 992px) {
 
 
   #map {
@@ -53,9 +53,6 @@ html, body {
   margin-top: 1rem;
   margin-left: 1rem;
   padding: 5px 11px;
-  /*background-color: rgb(63, 184, 210);
-  color: white;
-  border-radius: 3px;*/
   cursor: pointer;
 }
 
@@ -97,7 +94,7 @@ input {
 .locations {
   position: relative;
   overflow: auto;
-  height: 81%;
+  height: 88%;
 
 }
 
@@ -143,7 +140,133 @@ li {
 
 /*}  /* end of @media width desktop */
 
+/*Medium devices (tablets, 768px and up)*/
+@media (max-width: 768px) {
 
+  #map {
+      width: 100%;
+      height: 90%;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: auto;
+
+  }
+
+
+  .navbar {
+    width: 100%;
+    height: 10%;
+    top: 0;
+    position: fixed;
+    background-color: rgba(51, 51, 51, 1);
+
+  }
+
+  .title {
+    font-family: 'Special Elite', cursive;
+    font-size: 2.5rem;
+    width: 90%;
+    margin-left: 23%;
+    margin-top: -2.3rem;
+
+  }
+
+
+  /* Style the button */
+#show-btn {
+  display: inline-block;
+  left: 0;
+  margin-top: 1.8rem;
+  margin-left: 1rem;
+  padding: 5px 11px;
+  cursor: pointer;
+}
+
+  #sidebar {
+      bottom: 0;
+      left: 0;
+      width: 35%;
+      height: 90%;
+      position: fixed;
+  		color: rgb(213, 213, 213);
+      background-color: rgb(68, 68, 68);
+      z-index: 1;
+
+  }
+
+  #sidebar:target {
+    transition-timing-function: ease;
+
+  }
+
+
+.search {
+  font-size: 30px;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: 'Amatica SC', bold, cursive;
+
+}
+
+input {
+  width: 13rem;
+  height: 25px;
+  font-size: 17px;
+  margin-left: -8px;
+
+}
+
+.locations {
+  position: relative;
+  overflow: auto;
+  height: 88%;
+
+}
+
+ul {
+  list-style: none;
+  padding-left: 2px;
+
+}
+
+li {
+  font-size: 16px;
+  color: rgb(242, 242, 242);
+  padding: 8px 0px;
+  font-family: 'Amatica SC', cursive;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+}
+
+.brew-name {
+  font-size: 22px;
+}
+
+.brew-hood {
+  font-size: 17px;
+}
+
+.icon {
+  float: left;
+  padding: 0;
+}
+
+.icon img {
+  height: 60px;
+  width: 60px;
+  padding-right: 5px;
+
+}
+
+.icon img:hover {
+  height: 62px;
+  width: 62px;
+}
+
+}
+/*end of tablet size @media query*/
 
  /*Small devices (landscape phones, 576px and up)*/
 @media (max-width: 576px) {
@@ -154,54 +277,122 @@ li {
       position: absolute;
       bottom: 0;
       right: 0;
+      z-index: auto;
 
   }
+
 
   .navbar {
     width: 100%;
     height: 10%;
     top: 0;
-    position: absolute;
+    position: fixed;
     background-color: rgba(51, 51, 51, 1);
 
   }
 
   .title {
     font-family: 'Special Elite', cursive;
-    font-size: 20px;
+    font-size: 1.3rem;
     width: 90%;
-    margin-left: 28%;
-    /*margin-top: 10px;*/
+    margin-left: 24%;
+    margin-top: -1.8rem;
 
   }
 
-  /* Hide the toggle checkbox */
-  #show-toggle {
-    display: none;
-  }
 
   /* Style the button */
 #show-btn {
-
+  display: inline-block;
   left: 0;
-  width: 20px;
-  /*margin-top: 10px;
-  margin-left: 10px;*/
+  margin-top: 1rem;
+  margin-left: 1rem;
   padding: 5px 11px;
-  background-color: rgb(63, 184, 210);
-  color: white;
-  border-radius: 3px;
   cursor: pointer;
 }
 
-  /* Show hidden content when the checkbox is checked */
-  #show-toggle:checked  ~ * #sidebar {
-    /*transform: translateX(-250px);*/
-    visibility: collapse;
+  #sidebar {
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      height: 90%;
+      position: fixed;
+  		color: rgb(213, 213, 213);
+      background-color: rgb(68, 68, 68);
+      z-index: 1;
+
   }
 
- }
- /*end of phone @media*/
+  #sidebar:target {
+    transition-timing-function: ease;
 
- /*Medium devices (tablets, 768px and up)*/
-@media (min-width: 768px) { ... }
+  }
+
+
+.search {
+  font-size: 30px;
+  margin-left: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: 'Amatica SC', bold, cursive;
+
+}
+
+input {
+  width: 10.5rem;
+  height: 25px;
+  font-size: 17px;
+  margin-left: -8px;
+
+}
+
+.locations {
+  position: relative;
+  overflow: auto;
+  height: 88%;
+
+}
+
+ul {
+  list-style: none;
+  padding-left: 2px;
+
+}
+
+li {
+  font-size: 16px;
+  color: rgb(242, 242, 242);
+  padding: 8px 1px;
+  font-family: 'Amatica SC', cursive;
+  border-bottom: 1px solid black;
+  cursor: pointer;
+}
+
+.brew-name {
+  font-size: 22px;
+}
+
+.brew-hood {
+  font-size: 17px;
+}
+
+.icon {
+  float: left;
+  padding: 0;
+}
+
+.icon img {
+  display: none;
+  /*height: 60px;
+  width: 60px;
+  padding-right: 5px;*/
+
+}
+
+.icon img:hover {
+  height: 62px;
+  width: 62px;
+}
+
+}
+ /*end of phone @media*/
