@@ -15,13 +15,11 @@
   <!-- http://knockoutjs.com/documentation/textinput-binding.html -->
   <div id="sidebar">
     <div class="search">
-      <!-- <span><i style="float:left;padding-top:10px"class="fa fa-foursquare" aria-hidden="true"></i>ilter:</span> -->
       <!-- <span data-bind="text: weather"></span> -->
       <input type="text" placeholder="name, hood, or style" data-bind="textInput: filterInput">
     </div>
     <div class="locations">
       <ul data-bind="foreach: filterBrew">
-        <!-- http://knockoutjs.com/documentation/click-binding.html -->
         <li data-bind="click: $root.showWindow">
           <span class="icon"><img data-bind="attr:{src: icon}"></span>
           <span class="brew-name" data-bind="text: name"></span> <br>
