@@ -15,9 +15,9 @@
   <!-- http://knockoutjs.com/documentation/textinput-binding.html -->
   <div id="sidebar">
     <div class="search">
-      <span><i style="float:left;padding-top:10px"class="fa fa-foursquare" aria-hidden="true"></i>ilter:</span>
+      <!-- <span><i style="float:left;padding-top:10px"class="fa fa-foursquare" aria-hidden="true"></i>ilter:</span> -->
       <!-- <span data-bind="text: weather"></span> -->
-      <input type="text" placeholder="name or neighborhood" data-bind="textInput: filterInput">
+      <input type="text" placeholder="name, hood, or style" data-bind="textInput: filterInput">
     </div>
     <div class="locations">
       <ul data-bind="foreach: filterBrew">
@@ -33,8 +33,7 @@
   </div>
 
   <div class="navbar">
-     <button id="show-btn">Toggle Search</button>
-     <!-- <button data-bind="event: {click: toggleSidebar}" id="show-btn">Toggle Search</button> -->
+     <i id="show-btn" class="fa fa-bars fa-lg" aria-hidden="true"><span style="font-size:1rem; padding-left: 5px;">Hide/Show</span></i>
     <h2 class="title">Charlotte Craft Brewers</h2>
   </div>
 

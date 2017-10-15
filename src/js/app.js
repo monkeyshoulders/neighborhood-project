@@ -7,14 +7,12 @@
 document.getElementById('show-btn').addEventListener('click', toggleSidebar);
 
 function toggleSidebar() {
-  var x = document.getElementById('sidebar');
-  var m = document.getElementById('map');
-  if (x.style.display === "none") {
-    x.style.display = "block";
-    m.style.width = "80%";
+  var sB = document.getElementById('sidebar');
+  if (sB.style.display === "none") {
+    sB.style.display = "block";
   } else {
-    x.style.display = "none";
-    m.style.width = "100%";
+    sB.style.display = "none";
+
   }
 };
 
@@ -111,6 +109,7 @@ var map; // delclares global map var
 var infowindow; //declares global infowindow var
 var markers = []; // stores markers
 
+
 function initMap() { // initializes map
   infowindow = new google.maps.InfoWindow();
   map = new google.maps.Map(document.getElementById('map'), {
@@ -127,9 +126,10 @@ function initMap() { // initializes map
     }]
   });
 
+
   function mapError() {
       alert('Error loading Google Maps. Check internet connection. Please try again later');
     }
-    
+
   ko.applyBindings(new ViewModel());
 }
