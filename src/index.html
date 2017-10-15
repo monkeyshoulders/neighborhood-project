@@ -16,6 +16,7 @@
   <div id="sidebar">
     <div class="search">
       <span><i style="float:left;padding-top:10px"class="fa fa-foursquare" aria-hidden="true"></i>ilter:</span>
+      <!-- <span data-bind="text: weather"></span> -->
       <input type="text" placeholder="name or neighborhood" data-bind="textInput: filterInput">
     </div>
     <div class="locations">
@@ -37,7 +38,7 @@
     <h2 class="title">Charlotte Craft Brewers</h2>
   </div>
 
-  <div id="map"></div>
+  <div id="map" onerror="mapError()"></div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="js/knockout.js"></script>

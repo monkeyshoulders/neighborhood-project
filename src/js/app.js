@@ -1,5 +1,4 @@
-//    TODO:
-//           4. Use FourSquare API
+//    TODO
 //           5. Error handling message
 //           6. README
 //           7. Mobile and Tablet Version
@@ -17,49 +16,29 @@ function toggleSidebar() {
     x.style.display = "none";
     m.style.width = "100%";
   }
-}
+};
 
-function getData(city, query, data) {
+  // weather api call
+  var api = "http://api.openweathermap.org/data/2.5/weather?lat=35.218939&lon=-80.842209&?id=524901&units=imperial&APPID=c23f6d23795d6a47a309155e714da031";
 
-  var CLIENT_ID = 'G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A',
-    CLIENT_SECRET = 'AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V',
-    version = '20170801',
-    city = city,
-    query = query,
-    base_url = "https://api.foursquare.com/v2/venues";
+    $.ajax(api).done(function(result) {
 
-  $.ajax({
-    url: base_url + '/search',
-    dataType: 'json',
-    data: {
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      near: city,
-      v: version,
-      query: query
-    }
-  }).done(function(result) {
+      // var temp = result.main.temp.toFixed(0);   // parse temp data to whole number
+      // var sky = result.weather[0].main;
+      // var weatherString = 'Charlotte Weather:' + sky + 'and ' + temp;
+      console.log(result.main.temp.toFixed(0));
+      console.log(result.weather[0].main);
 
-    var venues = result.response.venues;
-    console.log(venues);
+    }).fail(function(error) {
+      alert('OOPS! Weather info failed to load, refresh browser or try again later.')
 
-    venues.forEach(function(venue) {
-      data.push(new Brewery(venue))
-    })
+    });
 
-
-  }).fail(function(error) {
-    alert('OOPS! FourSquare info failed to load, refresh browser or try again later.')
-    console.log(error);
-  });
-}
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
   var self = this;
-  // this.id = data.id;
   this.name = data.name;
   this.address = data.address;
-  this.phone = data.phone;
   this.hood = data.hood + " " + " ";
   this.style = 'Style: ' + data.style;
   this.website = '<a href="' + data.website + '" target="blank">Go to Website</a>';
@@ -72,10 +51,13 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
 
   });
 
-  this.marker.addListener('click', function() {
+  this.marker.addListener('click', function() {  //displays infowindow on click event
     var marker = this;
     infowindow.setContent(self.brewInfoString); // sets content of infowindow
     infowindow.open(map, this);
+    setTimeout(function() {                 //closes infowindow after 10 secs.
+      infowindow.close(map, this.marker);
+    }, 10000);
 
     marker.setAnimation(google.maps.Animation.BOUNCE); // animation of marker on click
     setTimeout(function() {
@@ -99,20 +81,16 @@ function makeInfoString(data) { //creates infoWindow content
 
 var ViewModel = function() {
   var self = this;
-
   this.breweries = ko.observableArray(); // watches breweries array
   this.filterInput = ko.observable(''); // watches search bar for Filtering
   for (var i = 0; i < brewers.length; i++) {
     this.breweries.push(new Brewery(brewers[i]));
   }
 
-  // getData('Charlotte', 'brewery', this.breweries);
-
-
   self.filterBrew = ko.computed(function() { // filters list view of breweries
     var filter = self.filterInput().toLowerCase();
     return ko.utils.arrayFilter(self.breweries(), function(brewery) {
-      var match = brewery.name.toLowerCase().indexOf(filter) !== -1 || brewery.hood.toLowerCase().indexOf(filter) !== -1 || brewery.style.toLowerCase().indexOf(filter) !== -1; // store the match state *help from Sarah in 1:1
+      var match = brewery.name.toLowerCase().indexOf(filter) !== -1 || brewery.hood.toLowerCase().indexOf(filter) !== -1 || brewery.style.toLowerCase().indexOf(filter) !== -1;   // store the match state *help from Sarah in 1:1
       brewery.marker.setVisible(match);
       return match;
     });
@@ -122,9 +100,9 @@ var ViewModel = function() {
 
     infowindow.setContent(this.brewInfoString);
     infowindow.open(map, this.marker);
-    setTimeout(function() {
+    setTimeout(function() {                 //closes infowindow after 10 secs.
       infowindow.close(map, this.marker);
-    }, 6000);
+    }, 10000);
 
   };
 };
@@ -149,10 +127,18 @@ function initMap() { // initializes map
     }]
   });
 
-  // if (/*map*/ !== 'undefined') {  // Error handling for map not loading
-  //   ko.applyBindings(new ViewModel());
-  // } else {
-  //     alert('Error loading Google Maps. Check internet connection. Please try again later');
-  // }
-  ko.applyBindings(new ViewModel());
+  if (document.getElementById('map') == 'undefined') {  // Error handling for map not loading
+    alert('Error loading Google Maps. Check internet connection. Please try again later');
+
+  } else {
+      ko.applyBindings(new ViewModel());
+  }
+  // ko.applyBindings(new ViewModel());
 }
+
+// function mapError(map) {
+//   if (map == 'undefined') {
+//     alert('Error loading Google Maps. Check internet connection. Please try again later');
+//   }
+//
+// };
