@@ -127,18 +127,9 @@ function initMap() { // initializes map
     }]
   });
 
-  if (document.getElementById('map') == 'undefined') {  // Error handling for map not loading
-    alert('Error loading Google Maps. Check internet connection. Please try again later');
-
-  } else {
-      ko.applyBindings(new ViewModel());
-  }
-  // ko.applyBindings(new ViewModel());
+  function mapError() {
+      alert('Error loading Google Maps. Check internet connection. Please try again later');
+    }
+    
+  ko.applyBindings(new ViewModel());
 }
-
-// function mapError(map) {
-//   if (map == 'undefined') {
-//     alert('Error loading Google Maps. Check internet connection. Please try again later');
-//   }
-//
-// };
