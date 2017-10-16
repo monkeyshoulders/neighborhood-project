@@ -88,7 +88,7 @@ var ViewModel = function() {
 
   this.breweries().forEach(function(brewery) { //loops over each brewery
     bounds.extend(brewery.marker.position);
-  })
+  });
 
   map.fitBounds(bounds); // and changes bounds
 
@@ -139,7 +139,7 @@ function initMap() { // initializes map
     alert('Error loading Google Maps. Check internet connection. Please try again later');
   }
 
-  viewModel = new ViewModel() // sets new ViewModel
+  viewModel = new ViewModel(); // sets new ViewModel
 
   ko.applyBindings(viewModel); //apply bindings to display map and markers and infowindows
 }
