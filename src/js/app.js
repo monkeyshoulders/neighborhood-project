@@ -16,16 +16,23 @@ function toggleSidebar() {
   }
 };
 
+
   // weather api call
   var api = "http://api.openweathermap.org/data/2.5/weather?lat=35.218939&lon=-80.842209&?id=524901&units=imperial&APPID=c23f6d23795d6a47a309155e714da031";
 
     $.ajax(api).done(function(result) {
 
-      // var temp = result.main.temp.toFixed(0);   // parse temp data to whole number
-      // var sky = result.weather[0].main;
-      // var weatherString = 'Charlotte Weather:' + sky + 'and ' + temp;
-      console.log(result.main.temp.toFixed(0));
-      console.log(result.weather[0].main);
+      var temp = result.main.temp.toFixed(0);   // parse temp data to whole number
+      var sky = result.weather[0].main;
+      var weatherString = '<span>Charlotte Weather:' + sky + 'and ' + temp + '</span>';
+      // function() {
+      //   var weatherInfo = document.getElementsByClassName('weather');
+      //   weatherInfo.append(weatherString);
+      // 
+      // }
+
+      console.log(temp);
+      console.log(sky);
 
     }).fail(function(error) {
       alert('OOPS! Weather info failed to load, refresh browser or try again later.')
