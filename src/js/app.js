@@ -13,7 +13,7 @@ function toggleSidebar() {
     sB.style.display = "none";
 
   }
-};
+}
 
 
   // weather api call
@@ -34,7 +34,7 @@ function toggleSidebar() {
       console.log(sky);
 
     }).fail(function(error) {
-      alert('OOPS! Weather info failed to load, refresh browser or try again later.')
+      alert('OOPS! Weather info failed to load, refresh browser or try again later.');
 
     });
 
@@ -80,7 +80,7 @@ function makeInfoString(data) { //creates infoWindow content
     '</div>' + '<div>' + data.website +
     '</div></div>';
   return content;
-};
+}
 
 
 var ViewModel = function() {
