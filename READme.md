@@ -6,7 +6,7 @@ This project was created from scratch as a part of Udacity's Front End Nanodegre
 ## How to Evaluate Project
 This page can be evaluated for all layouts by using either Github.io or running via your machine. The first step is to download or clone this repository to your local machine. Or navigate to
 ```sh
-https://monkeyshoulders.github.io/neighborhood-project/dist
+https://monkeyshoulders.github.io/neighborhood-project
 ```
 and inspect using Google Chrome Dev tools. To see the readable code use the src folder in the repository.
 
