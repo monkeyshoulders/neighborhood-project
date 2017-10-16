@@ -24,11 +24,9 @@ function toggleSidebar() {
       var temp = result.main.temp.toFixed(0);   // parse temp data to whole number
       var sky = result.weather[0].main;
       var weatherString = '<span>Weather: ' + temp + ' degrees' + ' & ' + sky + '</span>';
-    
-      $('.weather').append(weatherString);
 
-      console.log(temp);
-      console.log(sky);
+      // $('.weather').append(weatherString); // KO observable?
+      var weather = ko.observable(weatherString)
 
     }).fail(function(error) {
       alert('OOPS! Weather info failed to load, refresh browser or try again later.');
