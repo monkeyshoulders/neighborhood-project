@@ -26,7 +26,8 @@ function toggleSidebar() {
       var weatherString = '<span>Weather: ' + temp + ' degrees' + ' & ' + sky + '</span>';
 
       // $('.weather').append(weatherString); // KO observable?
-      var weather = ko.observable(weatherString)
+      var weather = ko.observable('');
+      weather.weatherString;
 
     }).fail(function(error) {
       alert('OOPS! Weather info failed to load, refresh browser or try again later.');
