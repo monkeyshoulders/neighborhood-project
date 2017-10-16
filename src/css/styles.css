@@ -54,6 +54,11 @@ html, body {
   z-index: 1;
 }
 
+.weather {
+  font-size: 1rem;
+  font-family: sans-serif;
+}
+
 .search {
   font-size: 30px;
   margin-left: 15px;

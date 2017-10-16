@@ -23,12 +23,9 @@ function toggleSidebar() {
 
       var temp = result.main.temp.toFixed(0);   // parse temp data to whole number
       var sky = result.weather[0].main;
-      var weatherString = '<span>Charlotte Weather:' + sky + 'and ' + temp + '</span>';
-      // function() {
-      //   var weatherInfo = document.getElementsByClassName('weather');
-      //   weatherInfo.append(weatherString);
-      //
-      // }
+      var weatherString = '<span>Weather: ' + temp + ' degrees' + ' & ' + sky + '</span>';
+    
+      $('.weather').append(weatherString);
 
       console.log(temp);
       console.log(sky);
