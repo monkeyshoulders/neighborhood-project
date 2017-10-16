@@ -1,7 +1,6 @@
-//    TODO
-//           5. Error handling message
-//           6. README
-//           7. Mobile and Tablet Version
+//    TODO    - Fix weather display
+//            - Fit bounds to map
+
 
 // toggle the sidebar when button is clicked
 document.getElementById('show-btn').addEventListener('click', toggleSidebar);
@@ -28,7 +27,7 @@ function toggleSidebar() {
       // function() {
       //   var weatherInfo = document.getElementsByClassName('weather');
       //   weatherInfo.append(weatherString);
-      // 
+      //
       // }
 
       console.log(temp);
