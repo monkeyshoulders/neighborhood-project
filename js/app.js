@@ -104,12 +104,19 @@ var ViewModel = function() {
   self.showWindow = function() { //displays infoWindow when list item is Clicked
 
     infowindow.setContent(this.brewInfoString);
+
     infowindow.open(map, this.marker);
     setTimeout(function() { //closes infowindow after 10 secs.
       infowindow.close(map, this.marker);
     }, 10000);
 
+    this.marker.setAnimation(google.maps.Animation.BOUNCE); // animation of marker on click of list
+    setTimeout(function() {
+      this.setAnimation(null);
+    }, 806);
+
   };
+
 };
 
 var map; // delclares global map var
