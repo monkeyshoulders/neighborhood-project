@@ -1,7 +1,3 @@
-//    TODO    - Fix weather display
-//            - Fit bounds to map
-
-
 // toggle the sidebar when button is clicked
 document.getElementById('show-btn').addEventListener('click', toggleSidebar);
 
@@ -16,23 +12,21 @@ function toggleSidebar() {
 }
 
 
-  // weather api call
-  var api = "http://api.openweathermap.org/data/2.5/weather?lat=35.218939&lon=-80.842209&?id=524901&units=imperial&APPID=c23f6d23795d6a47a309155e714da031";
+// weather api call
+var api = "http://api.openweathermap.org/data/2.5/weather?lat=35.218939&lon=-80.842209&?id=524901&units=imperial&APPID=c23f6d23795d6a47a309155e714da031";
 
-    $.ajax(api).done(function(result) {
+$.ajax(api).done(function(result) {
 
-      var temp = result.main.temp.toFixed(0);   // parse temp data to whole number
-      var sky = result.weather[0].main;
-      var weatherString = '<span>Weather: ' + temp + ' degrees' + ' & ' + sky + '</span>';
+  var temp = result.main.temp.toFixed(0); // parse temp data to whole number
+  var sky = result.weather[0].main;
+  var weatherString = '<span>Weather: ' + temp + '°' + ' & ' + sky + '</span>'; //create a string for results
 
-      // $('.weather').append(weatherString); // KO observable?
-      var weather = ko.observable('');
-      weather.weatherString;
+  viewModel.weather(weatherString);
 
-    }).fail(function(error) {
-      alert('OOPS! Weather info failed to load, refresh browser or try again later.');
+}).fail(function(error) {
+  alert('OOPS! Weather info failed to load, refresh browser or try again later.');
 
-    });
+});
 
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
@@ -43,7 +37,7 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   this.style = 'Style: ' + data.style;
   this.website = '<a href="' + data.website + '" target="blank">Go to Website</a>';
   this.icon = data.icon;
-  this.marker = new google.maps.Marker({ // creates a new marker
+  this.marker = new google.maps.Marker({ // creates a new marker per brewery
     position: data.ll,
     map: map,
     icon: data.mapicon,
@@ -51,11 +45,11 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
 
   });
 
-  this.marker.addListener('click', function() {  //displays infowindow on click event
+  this.marker.addListener('click', function() { //displays infowindow on click event
     var marker = this;
     infowindow.setContent(self.brewInfoString); // sets content of infowindow
     infowindow.open(map, this);
-    setTimeout(function() {                 //closes infowindow after 10 secs.
+    setTimeout(function() { //closes infowindow after 10 secs.
       infowindow.close(map, this.marker);
     }, 10000);
 
@@ -82,15 +76,26 @@ function makeInfoString(data) { //creates infoWindow content
 var ViewModel = function() {
   var self = this;
   this.breweries = ko.observableArray(); // watches breweries array
+
+  this.weather = ko.observable(''); //watches weather api data
+
   this.filterInput = ko.observable(''); // watches search bar for Filtering
   for (var i = 0; i < brewers.length; i++) {
     this.breweries.push(new Brewery(brewers[i]));
   }
 
+  var bounds = new google.maps.LatLngBounds(); // creates bounds object for map
+
+  this.breweries().forEach(function(brewery) { //loops over each brewery
+    bounds.extend(brewery.marker.position);
+  })
+
+  map.fitBounds(bounds); // and changes bounds
+
   self.filterBrew = ko.computed(function() { // filters list view of breweries
-    var filter = self.filterInput().toLowerCase();
+    var filter = self.filterInput().toLowerCase(); //changes to lowercase for Filtering purposes
     return ko.utils.arrayFilter(self.breweries(), function(brewery) {
-      var match = brewery.name.toLowerCase().indexOf(filter) !== -1 || brewery.hood.toLowerCase().indexOf(filter) !== -1 || brewery.style.toLowerCase().indexOf(filter) !== -1;   // store the match state *help from Sarah in 1:1
+      var match = brewery.name.toLowerCase().indexOf(filter) !== -1 || brewery.hood.toLowerCase().indexOf(filter) !== -1 || brewery.style.toLowerCase().indexOf(filter) !== -1; // store the match state *help from Sarah in 1:1
       brewery.marker.setVisible(match);
       return match;
     });
@@ -100,7 +105,7 @@ var ViewModel = function() {
 
     infowindow.setContent(this.brewInfoString);
     infowindow.open(map, this.marker);
-    setTimeout(function() {                 //closes infowindow after 10 secs.
+    setTimeout(function() { //closes infowindow after 10 secs.
       infowindow.close(map, this.marker);
     }, 10000);
 
@@ -110,6 +115,7 @@ var ViewModel = function() {
 var map; // delclares global map var
 var infowindow; //declares global infowindow var
 var markers = []; // stores markers
+var viewModel; //declares global viewModel
 
 
 function initMap() { // initializes map
@@ -130,8 +136,10 @@ function initMap() { // initializes map
 
 
   function mapError() {
-      alert('Error loading Google Maps. Check internet connection. Please try again later');
-    }
+    alert('Error loading Google Maps. Check internet connection. Please try again later');
+  }
 
-  ko.applyBindings(new ViewModel());
+  viewModel = new ViewModel() // sets new ViewModel
+
+  ko.applyBindings(viewModel); //apply bindings to display map and markers and infowindows
 }

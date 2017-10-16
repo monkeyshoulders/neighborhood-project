@@ -57,6 +57,7 @@ html, body {
 .weather {
   font-size: 1rem;
   font-family: sans-serif;
+  color: rgb(63, 184, 210);
 }
 
 .search {
@@ -123,6 +124,8 @@ li {
     width: 30%;
   }
 }
+
+
 /*end of @media width 1024px*/
 
 @media (min-width: 768px) and (max-width: 850px) {
@@ -130,6 +133,7 @@ li {
     width: 35%;
   }
 }
+/*end of @media width 768-850px*/
 /*Medium devices (tablets, 768px and up)*/
 
 @media (max-width: 768px) {
@@ -145,6 +149,8 @@ li {
     width: 90%;
   }
 }
+
+
 /*end of tablet size @media query*/
 
 @media (max-width: 657px) {
@@ -170,6 +176,8 @@ li {
     display: none;
   }
 }
+
+
 /*Small devices (landscape phones, 576px and up)*/
 
 @media (max-width: 576px) {
@@ -184,6 +192,9 @@ li {
   }
   #sidebar {
     width: 40%;
+  }
+  .weather {
+    font-size: 0.8rem;
   }
   input {
     width: 90%;
@@ -200,4 +211,6 @@ li {
     display: none;
   }
 }
+
+
 /*end of phone @media*/
