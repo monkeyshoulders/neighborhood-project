@@ -4,7 +4,7 @@
 This project was created from scratch as a part of Udacity's Front End Nanodegree program. This Charlotte Craft Brewers single page application displays my favorite local breweries and lets the user filter the results via the search bar. This project uses the Google Maps API to display a map as well as Open Weather API to display the local weather.
 
 ## How to Evaluate Project
-This page can be evaluated for all layouts by running it via your machine. The first step is to download or clone this repository to your local machine and inspect using Google Chrome Dev tools.
+This page can be evaluated for all layouts by running it via your machine. The first step is to download or clone this repository to your local machine. Open the index.html file and inspect using Google Chrome Dev tools.
 
 ### I completed this project as per the Project Rubric ###
 https://review.udacity.com/#!/rubrics/17/view

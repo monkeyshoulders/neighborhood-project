@@ -11,7 +11,6 @@ function toggleSidebar() {
   }
 }
 
-
 // weather api call
 var api = "http://api.openweathermap.org/data/2.5/weather?lat=35.218939&lon=-80.842209&?id=524901&units=imperial&APPID=c23f6d23795d6a47a309155e714da031";
 
@@ -27,6 +26,15 @@ $.ajax(api).done(function(result) {
   alert('OOPS! Weather info failed to load, refresh browser or try again later.');
 
 });
+
+// var mapApi = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBX6Y4qTu4NJsJdlXPJljmcYiivqSV-uo0&v=3";
+//
+// $.getScript(mapApi).done(function() {
+//     initMap();
+//
+// }).fail(function(error) {
+//     alert('Error loading Google Maps. Please refresh or try again later');
+// });
 
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
@@ -101,7 +109,7 @@ var ViewModel = function() {
     });
   });
 
-  self.showWindow = function() { //displays infoWindow when list item is Clicked
+  self.showWindow = function(marker) { //displays infoWindow when list item is Clicked
 
     infowindow.setContent(this.brewInfoString);
 
@@ -112,18 +120,21 @@ var ViewModel = function() {
 
     this.marker.setAnimation(google.maps.Animation.BOUNCE); // animation of marker on click of list
     setTimeout(function() {
-      this.setAnimation(null);
+      this.marker.setAnimation(self.marker);
     }, 806);
 
-  };
+  };  // end of showWindow
 
-};
+}; // end of ViewModel
 
 var map; // delclares global map var
 var infowindow; //declares global infowindow var
 var markers = []; // stores markers
 var viewModel; //declares global viewModel
 
+function mapError() {
+   alert('Error loading Google Maps. Please refresh or try again later');
+}
 
 function initMap() { // initializes map
   infowindow = new google.maps.InfoWindow();
@@ -140,11 +151,6 @@ function initMap() { // initializes map
       }]
     }]
   });
-
-
-  function mapError() {
-    alert('Error loading Google Maps. Check internet connection. Please try again later');
-  }
 
   viewModel = new ViewModel(); // sets new ViewModel
 
