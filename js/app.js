@@ -27,15 +27,6 @@ $.ajax(api).done(function(result) {
 
 });
 
-// var mapApi = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBX6Y4qTu4NJsJdlXPJljmcYiivqSV-uo0&v=3";
-//
-// $.getScript(mapApi).done(function() {
-//     initMap();
-//
-// }).fail(function(error) {
-//     alert('Error loading Google Maps. Please refresh or try again later');
-// });
-
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
   var self = this;
