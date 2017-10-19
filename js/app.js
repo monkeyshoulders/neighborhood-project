@@ -11,6 +11,7 @@ function toggleSidebar() {
   }
 }
 
+var weather;
 // weather api call
 var api = "http://api.openweathermap.org/data/2.5/weather?lat=35.218939&lon=-80.842209&?id=524901&units=imperial&APPID=c23f6d23795d6a47a309155e714da031";
 
@@ -76,7 +77,7 @@ var ViewModel = function() {
   var self = this;
   this.breweries = ko.observableArray(); // watches breweries array
 
-  this.weather = ko.observable(''); //watches weather api data
+  this.weather = ko.observable(''); //watches weather api data  //Here's the problem
 
   this.filterInput = ko.observable(''); // watches search bar for Filtering
   for (var i = 0; i < brewers.length; i++) {
@@ -110,12 +111,12 @@ var ViewModel = function() {
     }, 10000);
 
     this.marker.setAnimation(google.maps.Animation.BOUNCE); // animation of marker on click of list
+    var toMarker = this.marker;
     setTimeout(function() {
-      this.marker.setAnimation(self.marker);
+      toMarker.setAnimation(marker);
     }, 806);
 
   };  // end of showWindow
-
 }; // end of ViewModel
 
 var map; // delclares global map var
@@ -123,9 +124,6 @@ var infowindow; //declares global infowindow var
 var markers = []; // stores markers
 var viewModel; //declares global viewModel
 
-function mapError() {
-   alert('Error loading Google Maps. Please refresh or try again later');
-}
 
 function initMap() { // initializes map
   infowindow = new google.maps.InfoWindow();
