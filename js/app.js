@@ -11,20 +11,40 @@ function toggleSidebar() {
   }
 }
 
-var weather;
-// weather api call
-var api = "http://api.openweathermap.org/data/2.5/weather?lat=35.218939&lon=-80.842209&?id=524901&units=imperial&APPID=c23f6d23795d6a47a309155e714da031";
+// var weather;
+// // weather api call
+// var api = "http://api.openweathermap.org/data/2.5/weather?lat=35.218939&lon=-80.842209&?id=524901&units=imperial&APPID=c23f6d23795d6a47a309155e714da031";
+//
+// $.ajax(api).done(function(result) {
+//
+//   var temp = result.main.temp.toFixed(0); // parse temp data to whole number
+//   var sky = result.weather[0].main;
+//   var weatherString = '<span>Weather: ' + temp + '°' + ' & ' + sky + '</span>'; //create a string for results
+//
+//   viewModel.weather(weatherString);
+//
+// }).fail(function(error) {
+//   alert('OOPS! Weather info failed to load, refresh browser or try again later.');
+//
+// });
 
-$.ajax(api).done(function(result) {
+var id = "&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A";
+var secret = "&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
+var apiCall = "https://api.foursquare.com/v2/venues/search?v=20161016&near=Charlotte&query=brewery&limit=50&intent=browse&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
 
-  var temp = result.main.temp.toFixed(0); // parse temp data to whole number
-  var sky = result.weather[0].main;
-  var weatherString = '<span>Weather: ' + temp + '°' + ' & ' + sky + '</span>'; //create a string for results
 
-  viewModel.weather(weatherString);
+$.ajax(apiCall).done(function(result) {
+  console.log(result);
+  // for (var i = 0; i < brewery.id.length; i++) {
+  //   brewery.id[i]
+  //   console.log(result);
+  // }
+
+  var phone = result.formattedPhone;
+
 
 }).fail(function(error) {
-  alert('OOPS! Weather info failed to load, refresh browser or try again later.');
+  alert('OOPS! Foursquare info failed to load, refresh browser or try again later.');
 
 });
 
@@ -37,6 +57,8 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   this.style = 'Style: ' + data.style;
   this.website = '<a href="' + data.website + '" target="blank">Go to Website</a>';
   this.icon = data.icon;
+  // this.phone = result.phone;
+  this.id = data.id;
   this.marker = new google.maps.Marker({ // creates a new marker per brewery
     position: data.ll,
     map: map,
@@ -68,6 +90,7 @@ function makeInfoString(data) { //creates infoWindow content
     '</em></div>' + '<div>' + data.address +
     '</div>' + '<div>' + data.hood +
     '</div>' + '<div>' + data.website +
+    '</div>' + '<div>' + data.phone +
     '</div></div>';
   return content;
 }
@@ -77,7 +100,7 @@ var ViewModel = function() {
   var self = this;
   this.breweries = ko.observableArray(); // watches breweries array
 
-  this.weather = ko.observable(''); //watches weather api data  //Here's the problem
+  // this.weather = ko.observable(''); //watches weather api data  //Here's the problem
 
   this.filterInput = ko.observable(''); // watches search bar for Filtering
   for (var i = 0; i < brewers.length; i++) {
