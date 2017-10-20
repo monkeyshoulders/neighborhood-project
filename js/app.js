@@ -16,10 +16,15 @@ var secret = "&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
 var apiCall = "https://api.foursquare.com/v2/venues/search?v=20161016&near=Charlotte&query=brewery&limit=50&intent=browse&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
 
 
-$.ajax(apiCall).done(function(result) {
-
-  var phone = result.response.venues[0].contact.formattedPhone;
-  console.log(phone);
+$.ajax(apiCall).done(function(response) {
+  var phone = function(result) {
+    for (var i = 0; i < response.venues.length; i++) {
+      return result;
+      console.log(result);
+    }
+  }
+  // var phone = response.formattedPhone;
+  // console.log(phone);
 
 }).fail(function(error) {
   alert('OOPS! Foursquare info failed to load, refresh browser or try again later.');
