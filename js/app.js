@@ -11,37 +11,15 @@ function toggleSidebar() {
   }
 }
 
-// var weather;
-// // weather api call
-// var api = "http://api.openweathermap.org/data/2.5/weather?lat=35.218939&lon=-80.842209&?id=524901&units=imperial&APPID=c23f6d23795d6a47a309155e714da031";
-//
-// $.ajax(api).done(function(result) {
-//
-//   var temp = result.main.temp.toFixed(0); // parse temp data to whole number
-//   var sky = result.weather[0].main;
-//   var weatherString = '<span>Weather: ' + temp + '°' + ' & ' + sky + '</span>'; //create a string for results
-//
-//   viewModel.weather(weatherString);
-//
-// }).fail(function(error) {
-//   alert('OOPS! Weather info failed to load, refresh browser or try again later.');
-//
-// });
-
 var id = "&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A";
 var secret = "&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
 var apiCall = "https://api.foursquare.com/v2/venues/search?v=20161016&near=Charlotte&query=brewery&limit=50&intent=browse&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
 
 
 $.ajax(apiCall).done(function(result) {
-  console.log(result);
-  // for (var i = 0; i < brewery.id.length; i++) {
-  //   brewery.id[i]
-  //   console.log(result);
-  // }
 
-  var phone = result.formattedPhone;
-
+  var phone = result.response.venues[0].contact.formattedPhone;
+  console.log(phone);
 
 }).fail(function(error) {
   alert('OOPS! Foursquare info failed to load, refresh browser or try again later.');
