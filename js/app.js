@@ -17,13 +17,13 @@ var apiCall = "https://api.foursquare.com/v2/venues/search?v=20161016&near=Charl
 
 // response.venues[0].contact.formattedPhone
 $.ajax(apiCall).done(function(response) {
+  var response = [];
   var phone = function(result) {
     for (var i = 0; i < response.venues.length; i++) {   //this doesnt work FYI
       return result;
       console.log(result);
     }
   }
-  // console.log(phone);
 
 }).fail(function(error) {
   alert('OOPS! Foursquare info failed to load, refresh browser or try again later.');
