@@ -14,11 +14,10 @@ function toggleSidebar() {
 function getData(marker) {
 
   // instead, get the venueId from the marker
-  var venueId = '53c12b08498efef74bd87bcf'
+  var venueId = marker.venueId;
 
   var id = "&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A";
   var secret = "&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
- // var apiCall = "https://api.foursquare.com/v2/venues/search?v=20161016&near=Charlotte&query=brewery&limit=50&intent=browse&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
   var requestUrl = 'https://api.foursquare.com/v2/venues/' + venueId + '?v=20161016&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V';
 
   // response.venues[0].contact.formattedPhone
@@ -27,7 +26,11 @@ function getData(marker) {
     console.log(response)
 
     // set info window content here
+    infowindow.setContent(self.brewInfoString);
     // open info window here
+    infowindow.open(map, this);
+
+   // ******** Not sure how to access the formattedPhone inside the response to display in the infowindow
 
   }).fail(function(error) {
     alert('OOPS! Foursquare info failed to load, refresh browser or try again later.');
@@ -45,13 +48,14 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   this.style = 'Style: ' + data.style;
   this.website = '<a href="' + data.website + '" target="blank">Go to Website</a>';
   this.icon = data.icon;
-  // this.phone = result.phone;
   this.id = data.id;
+  this.phone = ?????????;
   this.marker = new google.maps.Marker({ // creates a new marker per brewery
     position: data.ll,
     map: map,
     icon: data.mapicon,
     animation: google.maps.Animation.DROP,
+    venueId: data.id
     // add venueId here
   });
 
@@ -59,12 +63,13 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
     var marker = this;
 
     // call getData here and pass the marker aka 'this' as an argument
+    getData(this);
 
-    // move to the ajax request's callback
-    infowindow.setContent(self.brewInfoString); // sets content of infowindow
-
-    // move to the ajax request's callback
-    infowindow.open(map, this);
+    // // move to the ajax request's callback
+    // infowindow.setContent(self.brewInfoString); // sets content of infowindow
+    //
+    // // move to the ajax request's callback
+    // infowindow.open(map, this);
 
 
     setTimeout(function() { //closes infowindow after 10 secs.
@@ -86,7 +91,7 @@ function makeInfoString(data) { //creates infoWindow content
     '</em></div>' + '<div>' + data.address +
     '</div>' + '<div>' + data.hood +
     '</div>' + '<div>' + data.website +
-    '</div>' + '<div>' + data.phone +
+    '</div>' + '<div>' +  +
     '</div></div>';
   return content;
 }
@@ -95,8 +100,6 @@ function makeInfoString(data) { //creates infoWindow content
 var ViewModel = function() {
   var self = this;
   this.breweries = ko.observableArray(); // watches breweries array
-
-  // this.weather = ko.observable(''); //watches weather api data  //Here's the problem
 
   this.filterInput = ko.observable(''); // watches search bar for Filtering
   for (var i = 0; i < brewers.length; i++) {
