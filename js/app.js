@@ -11,6 +11,8 @@ function toggleSidebar() {
   }
 }
 
+var fsPhone;
+
 function getData(marker) {
 
   // instead, get the venueId from the marker
@@ -23,10 +25,9 @@ function getData(marker) {
   // response.venues[0].contact.formattedPhone
   $.ajax(requestUrl).done(function(result) {
 
-    var fsPhone = result.response.venue.contact.phone;
+     fsPhone = result.response.venue.contact.formattedPhone;
 
     console.log(fsPhone);
-    console.log(result);
 
     // // set info window content here
     // infowindow.setContent(self.brewInfoString);
@@ -52,7 +53,7 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   this.website = '<a href="' + data.website + '" target="blank">Go to Website</a>';
   this.icon = data.icon;
   this.id = data.id;
-  // this.phone = ;
+  this.phone = self.fsPhone;
   this.marker = new google.maps.Marker({ // creates a new marker per brewery
     position: data.ll,
     map: map,
