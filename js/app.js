@@ -18,17 +18,20 @@ function getData(marker) {
 
   var id = "&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A";
   var secret = "&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
-  var requestUrl = 'https://api.foursquare.com/v2/venues/' + venueId + '?v=20161016&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V';
+  var requestUrl = 'https://api.foursquare.com/v2/venues/' + venueId + '?v=20161016&' + id + secret;
 
   // response.venues[0].contact.formattedPhone
-  $.ajax(requestUrl).done(function(response) {
+  $.ajax(requestUrl).done(function(result) {
 
-    console.log(response)
+    var fsPhone = result.response.venue.contact.phone;
 
-    // set info window content here
-    infowindow.setContent(self.brewInfoString);
-    // open info window here
-    infowindow.open(map, this);
+    console.log(fsPhone);
+    console.log(result);
+
+    // // set info window content here
+    // infowindow.setContent(self.brewInfoString);
+    // // open info window here
+    // infowindow.open(map, this);
 
    // ******** Not sure how to access the formattedPhone inside the response to display in the infowindow
 
@@ -49,7 +52,7 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   this.website = '<a href="' + data.website + '" target="blank">Go to Website</a>';
   this.icon = data.icon;
   this.id = data.id;
-  this.phone = ?????????;
+  // this.phone = ;
   this.marker = new google.maps.Marker({ // creates a new marker per brewery
     position: data.ll,
     map: map,
@@ -65,11 +68,11 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
     // call getData here and pass the marker aka 'this' as an argument
     getData(this);
 
-    // // move to the ajax request's callback
-    // infowindow.setContent(self.brewInfoString); // sets content of infowindow
-    //
-    // // move to the ajax request's callback
-    // infowindow.open(map, this);
+    // move to the ajax request's callback
+    infowindow.setContent(self.brewInfoString); // sets content of infowindow
+
+    // move to the ajax request's callback
+    infowindow.open(map, this);
 
 
     setTimeout(function() { //closes infowindow after 10 secs.
@@ -124,6 +127,8 @@ var ViewModel = function() {
   });
 
   self.showWindow = function(marker) { //displays infoWindow when list item is Clicked
+
+    getData(this.marker)
 
     infowindow.setContent(this.brewInfoString);
 
