@@ -26,7 +26,7 @@ $.ajax(apiCall).done(function(response) {
   }
 
 }).fail(function(error) {
-  alert('OOPS! Foursquare info failed to load, refresh browser or try again later.');
+  alert('OOPS! Foursquare info failed to load, refresh browser or try again later.'); //error if foursquare doesnt load
 
 });
 
