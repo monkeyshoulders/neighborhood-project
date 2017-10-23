@@ -18,9 +18,9 @@ var apiCall = "https://api.foursquare.com/v2/venues/search?v=20161016&near=Charl
 // response.venues[0].contact.formattedPhone
 $.ajax(apiCall).done(function(result) {
 
-  for (var i = 0; i < brewery.length; i++) {
-    brewery[i] // do something with the id and to pull results 
-  }
+  // for (var i = 0; i < brewery.length; i++) {
+  //   brewery[i] // do something with the id and to pull results
+  // }
 
     console.log(result.response.venues[0].contact.formattedPhone);
     console.log(result);
