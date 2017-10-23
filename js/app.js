@@ -11,24 +11,30 @@ function toggleSidebar() {
   }
 }
 
-var id = "&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A";
-var secret = "&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
-var apiCall = "https://api.foursquare.com/v2/venues/search?v=20161016&near=Charlotte&query=brewery&limit=50&intent=browse&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
+function getData(marker) {
 
-// response.venues[0].contact.formattedPhone
-$.ajax(apiCall).done(function(result) {
+  // instead, get the venueId from the marker
+  var venueId = '53c12b08498efef74bd87bcf'
 
-  // for (var i = 0; i < brewery.length; i++) {
-  //   brewery[i] // do something with the id and to pull results
-  // }
+  var id = "&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A";
+  var secret = "&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
+ // var apiCall = "https://api.foursquare.com/v2/venues/search?v=20161016&near=Charlotte&query=brewery&limit=50&intent=browse&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V";
+  var requestUrl = 'https://api.foursquare.com/v2/venues/' + venueId + '?v=20161016&client_id=G00UBXWIKITPALICMOOROAKXX54N1LCXQIS4XRNWF2CAMS2A&client_secret=AZPV1I5KQ5WKIEZKXRW1TRBY1Q3XGNUHB2SQOKKQHMVH4S3V';
 
-    console.log(result.response.venues[0].contact.formattedPhone);
-    console.log(result);
+  // response.venues[0].contact.formattedPhone
+  $.ajax(requestUrl).done(function(response) {
 
-}).fail(function(error) {    //error if foursquare doesnt load
-  alert('OOPS! Foursquare info failed to load, refresh browser or try again later.');
+    console.log(response)
 
-});
+    // set info window content here
+    // open info window here
+
+  }).fail(function(error) {
+    alert('OOPS! Foursquare info failed to load, refresh browser or try again later.');
+
+  });
+
+}
 
 
 var Brewery = function(data) { // Brewery contructor that accesses brewers in model.js
@@ -46,13 +52,21 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
     map: map,
     icon: data.mapicon,
     animation: google.maps.Animation.DROP,
-
+    // add venueId here
   });
 
   this.marker.addListener('click', function() { //displays infowindow on click event
     var marker = this;
+
+    // call getData here and pass the marker aka 'this' as an argument
+
+    // move to the ajax request's callback
     infowindow.setContent(self.brewInfoString); // sets content of infowindow
+
+    // move to the ajax request's callback
     infowindow.open(map, this);
+
+
     setTimeout(function() { //closes infowindow after 10 secs.
       infowindow.close(map, this.marker);
     }, 10000);
