@@ -10,7 +10,6 @@ function toggleSidebar() {
 
   }
 }
-
 var fsPhone;
 
 function getData(marker) {
@@ -25,7 +24,10 @@ function getData(marker) {
   // response.venues[0].contact.formattedPhone
   $.ajax(requestUrl).done(function(result) {
 
-     fsPhone = result.response.venue.contact.formattedPhone;
+
+    fsPhone = result.response.venue.contact.formattedPhone;
+
+
 
     console.log(fsPhone);
 
@@ -34,7 +36,7 @@ function getData(marker) {
     // // open info window here
     // infowindow.open(map, this);
 
-   // ******** Not sure how to access the formattedPhone inside the response to display in the infowindow
+    // ******** Not sure how to access the formattedPhone inside the response to display in the infowindow
 
   }).fail(function(error) {
     alert('OOPS! Foursquare info failed to load, refresh browser or try again later.');
@@ -53,7 +55,6 @@ var Brewery = function(data) { // Brewery contructor that accesses brewers in mo
   this.website = '<a href="' + data.website + '" target="blank">Go to Website</a>';
   this.icon = data.icon;
   this.id = data.id;
-  this.phone = self.fsPhone;
   this.marker = new google.maps.Marker({ // creates a new marker per brewery
     position: data.ll,
     map: map,
@@ -95,7 +96,7 @@ function makeInfoString(data) { //creates infoWindow content
     '</em></div>' + '<div>' + data.address +
     '</div>' + '<div>' + data.hood +
     '</div>' + '<div>' + data.website +
-    '</div>' + '<div>' +  +
+    '</div>' + '<div>' + fsPhone +
     '</div></div>';
   return content;
 }
@@ -103,6 +104,7 @@ function makeInfoString(data) { //creates infoWindow content
 
 var ViewModel = function() {
   var self = this;
+
   this.breweries = ko.observableArray(); // watches breweries array
 
   this.filterInput = ko.observable(''); // watches search bar for Filtering
@@ -144,7 +146,8 @@ var ViewModel = function() {
       toMarker.setAnimation(marker);
     }, 806);
 
-  };  // end of showWindow
+  }; // end of showWindow
+
 }; // end of ViewModel
 
 var map; // delclares global map var
