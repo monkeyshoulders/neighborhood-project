@@ -84,18 +84,5 @@ var brewers = [{
     mapicon: 'img/woodenmap.png',
     id: '558eea9e498ed2929de8df51'
   },
-  {
-    name: 'Legion Brewing',
-    ll: {
-      lat: 35.218387,
-      lng: -80.812963
-    },
-    address: '1906 Commonwealth Ave',
-    hood: 'Plaza Midwood',
-    website: 'http://legionbrewing.com/',
-    style: 'American',
-    icon: 'img/legion.jpg',
-    mapicon: 'img/legionmap.png',
-    id: '5670d3f6498e49f081713c5f'
-  },
+
 ];
