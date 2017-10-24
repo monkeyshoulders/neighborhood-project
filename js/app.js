@@ -132,7 +132,7 @@ var ViewModel = function() {
 
   self.showWindow = function(marker) { //displays infoWindow when list item is Clicked
 
-    getData(this.marker)
+    getData(this.marker);
 
     infowindow.setContent(this.brewInfoString);
 
