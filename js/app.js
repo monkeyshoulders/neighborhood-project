@@ -7,9 +7,9 @@ function toggleSidebar() {
     sB.style.display = "block";
   } else {
     sB.style.display = "none";
-
   }
 }
+
 var fsPhone;
 
 function getData(marker) {
